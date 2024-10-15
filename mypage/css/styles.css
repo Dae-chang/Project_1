@@ -1,0 +1,118 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* header */
+
+header {
+  background-color: #f8f8f8;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+.logo {
+  max-width: 200px;
+  margin: 0 auto;
+}
+.user-actions {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.btn {
+  padding: 10px 20px;
+  margin: 0 5px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.btn {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+#favorites h2 {
+  text-align: center;
+}
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 300px);
+  gap: 20px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.favorite-item {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #333;
+}
+.favorite-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.heart-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: red;
+  cursor: pointer;
+}
+.pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+.pagination button {
+  margin: 0 5px;
+}
+
+/* review */
+
+#reviews h2 {
+  text-align: center;
+}
+.review-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.review-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  height: 80px;
+  margin-bottom: 10px;
+  padding: 0 20px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 20px;
+}
