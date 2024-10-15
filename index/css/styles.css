@@ -1,0 +1,169 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* header */
+
+header {
+  background-color: #f8f8f8;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+.logo {
+  max-width: 200px;
+  margin: 0 auto;
+}
+.user-actions {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.btn {
+  padding: 10px 20px;
+  margin: 0 5px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* main */
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* home */
+
+#home {
+  height: 60vh;
+}
+#slideshow {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  object-fit: contain;
+  background-color: #f0f0f0;
+}
+.slide.active {
+  opacity: 1;
+}
+
+/* attractions */
+
+#attractions {
+  padding: 20px;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#attractions h2 {
+  margin-bottom: 20px;
+}
+
+.attractions-slider {
+  flex: 1;
+  position: relative;
+}
+
+.attraction-item {
+  width: 100%;
+  text-align: center;
+  padding: 0 10px;
+}
+
+.attraction-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Slick 슬라이더 스타일 */
+.slick-slider {
+  height: 100%;
+}
+
+.slick-list,
+.slick-track {
+  height: 100%;
+}
+
+.slick-slide {
+  height: auto;
+}
+
+.slick-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  cursor: pointer;
+  font-size: 0;
+  line-height: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.slick-prev {
+  left: 10px;
+}
+
+.slick-next {
+  right: 10px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 20px;
+  line-height: 1;
+  opacity: 0.75;
+}
+
+.slick-prev:before {
+  content: "←";
+}
+
+.slick-next:before {
+  content: "→";
+}
+
+/* about */
+
+#about,
+#contact {
+  padding: 20px;
+}
+
+/* footer */
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: auto;
+}
