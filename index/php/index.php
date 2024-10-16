@@ -72,17 +72,39 @@
         <button class="slick-prev">이전</button>
         <button class="slick-next">다음</button>
         </section>
-
-        <section id="about">
-            <h2>대구 소개</h2>
-            <p>대구는 한국의 주요 도시 중 하나로, 풍부한 역사와 문화를 자랑합니다.</p>
+        <!-- 숙소&교통편 안내 -->
+        <section>
+            <div class="information" id="info1">숙소를 찾으신다면? ----------->
+            <a href="https://www.yeogi.com/domestic-accommodations?keyword=%EB%8C%80%EA%B5%AC&autoKeyword=&checkIn=2024-10-16&checkOut=2024-10-17&personal=2&freeForm=true" 
+            alt="여기어때 링크">여기어때</a>
+            </div>
+            <div class="information" id="info2">숙소를 찾으신다면? ----------->
+            <a href="https://www.yanolja.com/search/%EB%8C%80%EA%B5%AC?pageKey=1729058002286" 
+            alt="여기어때 링크">야놀자</a>
+            </div>
+            <div class="information" id="info3">기차표 예매 ----------->
+            <a href="https://www.letskorail.com/" 
+            alt="여기어때 링크">코레일</a>
+            </div>
         </section>
+        <!-- 대구소개 유튜브 -->
+        <section >
+        <div class="youtube">
+        <iframe 
+    width="1903" 
+    height="938" 
+    src="https://www.youtube.com/embed/AcNBb1Ok6Ak?si=FxCV0IXGrQGbuiVK&autoplay=1&mute=1" 
+    title="YouTube video player" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    referrerpolicy="strict-origin-when-cross-origin" 
+    allowfullscreen>
+</iframe>
 
-        <section id="contact">
-            <h2>연락처</h2>
-            <p>이메일: info@daegu-tourism.com</p>
-            <p>전화: 053-123-4567</p>
+    </div>
         </section>
+        
+      
         
     </main>
 

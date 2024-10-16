@@ -151,6 +151,21 @@ main {
   content: "→";
 }
 
+/* 숙소&교통편 안내 */
+.information {
+  text-align: center;
+  background-color: #d9d9d9;
+  padding: 20px;
+}
+
+/* 유튜브 */
+.youtube {
+  display: flex;
+  justify-content: center;
+}
+iframe {
+  display: block;
+}
 /* about */
 
 #about,
