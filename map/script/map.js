@@ -110,27 +110,67 @@ function getCoordinates(address) {
 }
 
 let markers = []; // 현재 지도에 표시된 마커들을 저장할 배열
-
+let currentInfoWindow = null; // 현재 열린 인포윈도우를 저장할 변수
 // 마커를 생성하고 지도에 추가하는 함수
-function addMarker(position, title) {
+function addMarker(position, title, content, num, courseNum, address) {
   const marker = new kakao.maps.Marker({
     position: position,
     map: map,
     title: title,
+    content: content,
+    num: num,
+    courseNum: courseNum,
+    address: address,
   });
-
   markers.push(marker); // 새로 생성된 마커를 배열에 저장하여 추후 제거할 수 있도록 함
-  console.log(`마커 추가됨: ${title}`); // 마커 추가 로그
-
-  // 인포 윈도우 생성
+  console.log(`마커 추가됨: ${title} : ${content}`); // 마커 추가 로그
+  let photoNum = 0;
+  if (num === "전역코스") {
+    photoNum = courseNum;
+    console.log(courseNum);
+  } else if (num === "1코스") {
+    photoNum = courseNum + 7;
+    console.log(courseNum + 8);
+  } else if (num === "2코스") {
+    photoNum = courseNum + 14;
+    console.log(courseNum + 14);
+  } else if (num === "3코스") {
+    photoNum = courseNum + 21;
+    console.log(courseNum + 21);
+  } else if (num === "4코스") {
+    photoNum = courseNum + 29;
+    console.log(courseNum + 29);
+  }
   const infowindow = new kakao.maps.InfoWindow({
-    content: `<div style="padding:15px;">${title}</div>`, // 마커에 표시할 내용
-    removable: true, // 인포윈도우를 닫을 수 있도록 설정
+    content: `
+      <div style="
+        width: 300px; 
+        padding: 15px; 
+        border-radius: 15px; 
+        background-color: white; 
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+        overflow: hidden;
+      ">
+        <img src="../img/detail_img_${photoNum}.jpg" alt="" style="width: 100%; height: auto; border-radius: 10px;">
+        <h3 style="margin: 10px 0 5px; font-size: 18px; text-align: left;">${title}</h3>
+        <p style="margin: 5px 0; font-size: 14px; text-align: left; color: #333;">${content}</p>
+        <p style="margin: 5px 0; font-size: 12px;  text-align: left;">주소: ${address}</p>
+        <hr style="border: none; border-top: 1px solid #ddd; margin: 5px 0;">
+        <a style="color: #666; font-size: 12px; text-align: center;">자세히보기</a>
+      </div>
+    `,
+    removable: true,
   });
 
   kakao.maps.event.addListener(marker, "click", () => {
-    // 클릭 시 발생할 이벤트 핸들러
-    infowindow.open(map, marker); // 마커 위에 인포 윈도우 열기
+    // 기존의 인포윈도우가 열려 있다면 닫음
+    if (currentInfoWindow) {
+      currentInfoWindow.close();
+    }
+
+    // 새로운 인포윈도우를 열고 현재 열린 인포윈도우로 설정
+    infowindow.open(map, marker);
+    currentInfoWindow = infowindow;
   });
 }
 
@@ -170,7 +210,14 @@ async function displayCourseMarkers(courseId) {
 
     try {
       const position = await getCoordinates(place.주소); // 주소를 통해 좌표를 얻음
-      addMarker(position, place.관광지); // 마커를 생성하고 지도에 추가
+      addMarker(
+        position,
+        place.관광지,
+        place.코스설명,
+        place.분류,
+        place.코스번호,
+        place.주소
+      ); // 마커를 생성하고 지도에 추가
       bounds.extend(position); // 마커 위치를 지도 범위에 포함시킴
     } catch (error) {
       console.error(`${place.관광지}의 위치를 표시할 수 없습니다:`, error);
