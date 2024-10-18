@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>대구 관광지 소개</title>
+    <title>대구 관광지  소개</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
@@ -73,18 +73,24 @@
         <button class="slick-next">다음</button>
         </section>
         <!-- 숙소&교통편 안내 -->
-        <section>
-            <div class="information" id="info1">숙소를 찾으신다면? ----------->
-            <a href="https://www.yeogi.com/domestic-accommodations?keyword=%EB%8C%80%EA%B5%AC&autoKeyword=&checkIn=2024-10-16&checkOut=2024-10-17&personal=2&freeForm=true" 
-            alt="여기어때 링크">여기어때</a>
+        <section class="information-section">
+            <div class="information" id="info1">
+                <span>숙소를 찾으신다면?</span>
+                <a href="https://www.yeogi.com/domestic-accommodations?keyword=%EB%8C%80%EA%B5%AC&autoKeyword=&personal=2&freeForm=true/" target="_blank">
+                    <img src="../img/index_img_6.jpg" alt="여기어때">
+                </a>
             </div>
-            <div class="information" id="info2">숙소를 찾으신다면? ----------->
-            <a href="https://www.yanolja.com/search/%EB%8C%80%EA%B5%AC?pageKey=1729058002286" 
-            alt="여기어때 링크">야놀자</a>
+            <div class="information" id="info2">
+                <span>다른 숙소 옵션을 원하시나요?</span>
+                <a href="https://www.yanolja.com/search/%EB%8C%80%EA%B5%AC?pageKey=1729146887534" target="_blank">
+                    <img src="../img/index_img_7.jpg" alt="야놀자">
+                </a>
             </div>
-            <div class="information" id="info3">기차표 예매 ----------->
-            <a href="https://www.letskorail.com/" 
-            alt="여기어때 링크">코레일</a>
+            <div class="information" id="info3">
+                <span>기차표 예매가 필요하신가요?</span>
+                <a href="https://www.letskorail.com/" target="_blank">
+                    <img src="../img/index_img_8.jpg" alt="코레일">
+                </a>
             </div>
         </section>
         <!-- 대구소개 유튜브 -->
@@ -93,15 +99,14 @@
         <iframe 
     width="1903" 
     height="938" 
-    src="https://www.youtube.com/embed/AcNBb1Ok6Ak?si=FxCV0IXGrQGbuiVK&autoplay=1&mute=1" 
+    src="https://www.youtube.com/embed/AcNBb1Ok6Ak?si=FxCV0IXGrQGbuiVK&mute=1" 
     title="YouTube video player" 
     frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
     referrerpolicy="strict-origin-when-cross-origin" 
     allowfullscreen>
 </iframe>
-
-    </div>
+        </div>
         </section>
         
       
