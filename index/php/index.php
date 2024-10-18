@@ -7,71 +7,39 @@
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../css/slide.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
 </head>
 <body>
 <header>
-    <div class="user-actions">
-        <a href="#login" class="btn">로그인</a>
-        <a href="#mypage" class="btn">마이페이지</a>
-    </div>
-    <div class="logo">
-        <img src="" alt="대구의창 로고">
-    </div>
+
+
+<nav class="header-nav">
+    <a href="#">HOME</a>
+    <a href="#">숙소 찾기</a>
+    <a href="#">추천영상</a>
+</nav>
+
+<div class="user-actions">
+    <a href="#">로그인</a>
+    <a href="#">마이페이지</a>
+</div>
 </header>
 
     <main>
-        <section id="home">
-            <div id="slideshow">
-                <img src="../img/index_img_1.jpg" alt="대구 이미지 1" class="slide">
-                <img src="../img/index_img_2.jpg" alt="대구 이미지 2" class="slide">
-                <img src="../img/index_img_3.jpg" alt="대구 이미지 3" class="slide">
-                <img src="../img/index_img_4.jpg" alt="대구 이미지 4" class="slide">
-                <img src="../img/index_img_5.jpg" alt="대구 이미지 5" class="slide">
-            </div>
-         </section>
 
-
-
-
+    <?php include 'slide.php'; ?>
+    <div class="white-space"></div>
 
         <section id="attractions">
         <h2>대구 관광지 코스</h2>
-        <div class="attractions-slider">
-            <div class="attraction-item">
-                <img src="../img/course1.jpg" alt="관광지 코스 1">
-                <h3>코스 1: 역사 탐방</h3>
-                <p>대구의 풍부한 역사를 체험하는 코스입니다.</p>
-                <a href="course1.php" class="btn">자세히 보기</a>
-            </div>
-            <div class="attraction-item">
-                <img src="../img/course2.jpg" alt="관광지 코스 2">
-                <h3>코스 2: 문화 체험</h3>
-                <p>대구의 다양한 문화를 즐길 수 있는 코스입니다.</p>
-                <a href="course2.php" class="btn">자세히 보기</a>
-            </div>
-            <div class="attraction-item">
-                <img src="../img/course3.jpg" alt="관광지 코스 3">
-                <h3>코스 3: 자연 탐방</h3>
-                <p>대구의 아름다운 자연을 만끽할 수 있는 코스입니다.</p>
-                <a href="course3.php" class="btn">자세히 보기</a>
-            </div>
-            <div class="attraction-item">
-                <img src="../img/course4.jpg" alt="관광지 코스 4">
-                <h3>코스 4: 맛집 투어</h3>
-                <p>대구의 맛있는 음식을 즐길 수 있는 코스입니다.</p>
-                <a href="course4.php" class="btn">자세히 보기</a>
-            </div>
-            <div class="attraction-item">
-                <img src="../img/course5.jpg" alt="관광지 코스 5">
-                <h3>코스 5: 쇼핑 여행</h3>
-                <p>대구의 다양한 쇼핑 명소를 둘러보는 코스입니다.</p>
-                <a href="course5.php" class="btn">자세히 보기</a>
-            </div>
-        </div>
-        <!-- 화살표 추가 -->
-        <button class="slick-prev">이전</button>
-        <button class="slick-next">다음</button>
+        
+
         </section>
+        <!-- 흰색 바탕 추가 -->
+        <div class="white-space"></div>
         <!-- 숙소&교통편 안내 -->
         <section class="information-section">
             <div class="information" id="info1">
@@ -93,20 +61,25 @@
                 </a>
             </div>
         </section>
+        <!-- 흰색 바탕 추가 -->
+        <div class="white-space"></div>
         <!-- 대구소개 유튜브 -->
-        <section >
-        <div class="youtube">
-        <iframe 
-    width="1903" 
-    height="938" 
-    src="https://www.youtube.com/embed/AcNBb1Ok6Ak?si=FxCV0IXGrQGbuiVK&mute=1" 
-    title="YouTube video player" 
-    frameborder="0" 
-    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    referrerpolicy="strict-origin-when-cross-origin" 
-    allowfullscreen>
-</iframe>
-        </div>
+        <section class="youtube-videos">
+            <h2>대구의 창 추천 영상 모음</h2>
+            <div class="video-container">
+                <div class="video small">
+                    <iframe width="300" height="300" src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <p>대구 명소 소개 1</p>
+                </div>
+                <div class="video small">
+                    <iframe width="300" height="300" src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <p>대구 명소 소개 2</p>
+                </div>
+                <div class="video large">
+                    <iframe width="500" height="500" src="https://www.youtube.com/embed/VIDEO_ID_3" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <p>대구 명소 소개 3</p>
+                </div>
+            </div>
         </section>
         
       
