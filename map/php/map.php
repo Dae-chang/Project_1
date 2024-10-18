@@ -71,6 +71,47 @@
         #map {
             width:  100%;
             height: 920px;
+        }   
+       
+         /* 모바일 모드 */
+        @media (max-width: 768px) {
+            main {
+                flex-direction: column;
+            }
+
+            #course-list {
+                width: 100%;
+                height: auto;
+                order: 2;
+                background-color: #f9f9f9;
+                border-top: 1px solid #ddd;
+            }
+
+            #map {
+                width: 100%;
+                height: 400px;
+                order: 1;
+            }
+
+            .course-item {
+                flex-direction: row;
+                padding: 10px 5px;
+            }
+
+            .course-item img {
+                width: 60px;
+                height: 60px;
+                margin-right: 10px;
+            }
+
+            .course-details h3 {
+                font-size: 14px;
+            }
+
+            .course-details p {
+                font-size: 12px;
+                color: #666;
+            }
         }
     </style>
     <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=dc62460607d7fe5bed6dabe6348dd72a&libraries=services"></script>
