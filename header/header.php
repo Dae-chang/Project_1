@@ -1,10 +1,9 @@
 
-
 <header id="home">
     <nav class="header-nav">
-        <a href="#home">HOME</a>
-        <a href="#information">숙소 찾기</a>
-        <a href="#youtube">추천영상</a>
+        <a href="../../index/php/index.php#home">HOME</a>
+        <a href="../../index/php/index.php#information">숙소 찾기</a>
+        <a href="../../index/php/index.php#youtube">추천영상</a>
     </nav>
 
     <div class="user-actions">

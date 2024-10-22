@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>대구 관광지 지도</title>
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../../header/header.css">
    
     <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=dc62460607d7fe5bed6dabe6348dd72a&libraries=services"></script>
     <script src="../script/map.js" defer></script>
 </head>
 <body>
-<?php include 'header.php'; ?>
+<?php include '../../header/header.php'; ?>
 
 <main>
     <div style="display: flex; flex: 1;">
