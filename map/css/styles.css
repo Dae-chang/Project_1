@@ -12,13 +12,16 @@ main {
   flex: 1;
 }
 #course-list {
-  width: 360px;
+
+  width: 380px;
   height: 920px;
   overflow-y: auto;
+  margin: 0;
+  padding: 0;
 }
 .course-count {
   width: 360px;
-  height: 100px;
+
   background-color: white;
   color: black;
   display: flex;
@@ -66,9 +69,19 @@ main {
   margin-right: 8px;
 }
 
+#course-detail {
+  width: 300px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 15px; /* course-list와의 간격 */
+  background-color: white;
+}
 #map {
   width: 100%;
-  height: 920px;
+  height: 800px;
+
 }
 
 /* 모바일 모드 */

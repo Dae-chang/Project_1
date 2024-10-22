@@ -12,12 +12,26 @@
 </head>
 <body>
 <?php include 'header.php'; ?>
-    <main>
+
+<main>
+    <div style="display: flex; flex: 1;">
+
         <section id="course-list">
             <div class="course-count">전체 5건</div>
             <!-- 코스 목록은 JavaScript로 동적으로 추가될 예정입니다 -->
         </section>
-        <section id="map"></section>
-    </main>
+        
+            <section id="course-detail" style="display: none;">
+            <div id="detail-container">
+            <h2 id="detail-title"></h2>
+            <img id="detail-image" alt="" style="width: 100%; border-radius: 15px;">
+            <p id="detail-description"></p>
+            <p id="detail-address"></p>
+            </div>
+          </section>
+      
+
+    <section id="map"></section>
+</main>
 </body>
 </html>
