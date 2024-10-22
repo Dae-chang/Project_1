@@ -1,113 +1,94 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>슬라이드 페이지</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
-        header {
-            background-color: #f8f8f8;
-            padding: 20px;
-            text-align: center;
-        }
-        .logo {
-            max-width: 200px;
-            margin-bottom: 10px;
-        }
-        .btn {
-            padding: 10px 20px;
-            margin: 0 5px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        main {
-            position: relative;
-            height: calc(100vh - 200px);
-        }
-        #home {
-            height: 100%;
-        }
-        #slideshow {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            object-fit: contain;
-            background-color: #f0f0f0;
-        }
-        .slide.active {
-            opacity: 1;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <img src="../img/logo.png" alt="로고" class="logo">
-        <div>
-            <a href="#" class="btn">로그인</a>
-            <a href="#" class="btn">마이페이지</a>
-        </div>
-    </header>
-
-    <main>
-        <section id="home">
-            <div id="slideshow">
-                <img src="../img/index_img_1.jpg" alt="이미지 1" class="slide">
-                <img src="../img/index_img_2.jpg" alt="이미지 2" class="slide">
-                <img src="../img/index_img_3.jpg" alt="이미지 3" class="slide">
-                <img src="../img/index_img_4.jpg" alt="이미지 4" class="slide">
-                <img src="../img/index_img_5.jpg" alt="이미지 5" class="slide">
+<section id="home">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="../img/Untitled1.jpg" alt="슬라이드 1">
+                <div class="progress-bar">
+                    <span class="slide-number">1/5</span>
+                    <div class="progress"></div>
+                </div>
             </div>
-        </section>
-    </main>
+            <div class="swiper-slide">
+                <img src="../img/Untitled2.jpg" alt="슬라이드 2">
+                <div class="progress-bar">
+                    <span class="slide-number">2/5</span>
+                    <div class="progress"></div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img src="../img/Untitled3.jpg" alt="슬라이드 3">
+                <div class="progress-bar">
+                    <span class="slide-number">3/5</span>
+                    <div class="progress"></div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img src="../img/Untitled4.jpg" alt="슬라이드 4">
+                <div class="progress-bar">
+                    <span class="slide-number">4/5</span>
+                    <div class="progress"></div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img src="../img/Untitled5.jpg" alt="슬라이드 5">
+                <div class="progress-bar">
+                    <span class="slide-number">5/5</span>
+                    <div class="progress"></div>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
 
-    <footer>
-        footer
-    </footer>
-
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
-        const slides = document.querySelectorAll('.slide');
-        let currentSlide = 0;
+        const swiper = new Swiper('.swiper-container', {
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
+            speed: 800, // 전환 속도를 800ms로 설정
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            on: {
+                init: function () {
+                    this.autoplay.stop();
+                    this.autoplay.start();
+                    updateProgress(this);
+                },
+                autoplayTimeLeft: function (s, time, progress) {
+                    updateProgress(this, progress);
+                },
+                slideChange: function () {
+                    updateProgress(this, 1);
+                }
+            },
+        });
 
-        function showSlide(index) {
-            slides[currentSlide].classList.remove('active');
-            slides[index].classList.add('active');
-            currentSlide = index;
+        function updateProgress(swiper, progress) {
+            const currentSlide = swiper.realIndex;
+            const totalSlides = swiper.slides.length;
+            const progressBar = swiper.slides[currentSlide].querySelector('.progress');
+            const slideNumber = swiper.slides[currentSlide].querySelector('.slide-number');
             
+            if (progress === undefined) {
+                progress = 1 - (swiper.autoplay.timeLeft / swiper.params.autoplay.delay);
+            }
+            
+            progressBar.style.width = `${(1 - progress) * 100}%`;
+            slideNumber.textContent = `${currentSlide + 1}/${totalSlides}`;
         }
 
-        function nextSlide() {
-            let nextIndex = (currentSlide + 1) % slides.length;
-            showSlide(nextIndex);
-        }
-
-        showSlide(0);
-        setInterval(nextSlide, 3000);
+        // 수동 조작 시 로딩 바 리셋
+        swiper.on('slideChangeTransitionEnd', function () {
+            updateProgress(this, 1);
+        });
     </script>
-</body>
-</html>
+</section>

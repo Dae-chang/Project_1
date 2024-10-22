@@ -12,6 +12,7 @@ main {
   flex: 1;
 }
 #course-list {
+
   width: 380px;
   height: 920px;
   overflow-y: auto;
@@ -20,6 +21,7 @@ main {
 }
 .course-count {
   width: 360px;
+
   background-color: white;
   color: black;
   display: flex;
@@ -66,6 +68,7 @@ main {
 .course-item .tags span {
   margin-right: 8px;
 }
+
 #course-detail {
   width: 300px;
   padding: 15px;
@@ -78,6 +81,7 @@ main {
 #map {
   width: 100%;
   height: 800px;
+
 }
 
 /* 모바일 모드 */

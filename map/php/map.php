@@ -12,8 +12,10 @@
 </head>
 <body>
 <?php include 'header.php'; ?>
+
 <main>
     <div style="display: flex; flex: 1;">
+
         <section id="course-list">
             <div class="course-count">전체 5건</div>
             <!-- 코스 목록은 JavaScript로 동적으로 추가될 예정입니다 -->
