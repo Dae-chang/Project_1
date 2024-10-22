@@ -20,31 +20,31 @@ const courses = [
   {
     id: 1,
     name: "대구 Best of Best",
-    image: "path/to/image1.jpg",
+    image: "../img/course1.jpg",
     description: "대구 대표 관광지 30선 코스",
   },
   {
     id: 2,
     name: "대구 속 시간여행",
-    image: "path/to/image2.jpg",
+    image: "../img/course2.jpg",
     description: "대구의 역사와 문화를 체험하는 코스",
   },
   {
     id: 3,
     name: "이렇게 좋을 수가",
-    image: "path/to/image3.jpg",
+    image: "../img/course3.jpg",
     description: "대구 수성구와 가창의 명소 코스",
   },
   {
     id: 4,
     name: "금수강산",
-    image: "path/to/image4.jpg",
+    image: "../img/course4.jpg",
     description: "대구의 자연을 즐기는 여유로운 코스",
   },
   {
     id: 5,
     name: "팔공산",
-    image: "path/to/image5.jpg",
+    image: "../img/course5.jpg",
     description: "대구의 자연을 즐기는 여유로운 코스",
   },
 ];
@@ -56,10 +56,13 @@ function renderCourseList() {
     const courseElement = document.createElement("div");
     courseElement.className = "course-item";
     courseElement.innerHTML = `
-            <img src="${course.image}" alt="${course.name}">
-            <h3>${course.name}</h3>
-            <p>${course.description}</p>
-        `;
+  <h3>${course.name}</h3>
+  <img src="${course.image}" alt="${course.name}">
+  <p>${course.description}</p>
+  <div class="tags">
+    <span>#가족여행</span><span>#친구</span><span>#먹거리</span>
+  </div>
+`;
     courseElement.addEventListener("click", () => onCourseClick(course));
     courseListElement.appendChild(courseElement);
   });
