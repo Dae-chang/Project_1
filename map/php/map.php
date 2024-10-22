@@ -56,18 +56,45 @@
             font-weight: bold;
         }
         .course-item {
-            width: 360px;
-            height: 300px;
-            border: 1px solid #ddd;
-            margin-bottom: 10px;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-        .course-item img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
+  width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin: 15px;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.course-item h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.course-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+}
+
+.course-item p {
+  font-size: 14px;
+  color: #666;
+  margin: 10px 0;
+}
+
+.course-item .tags {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #666;
+}
+
+.course-item .tags span {
+  margin-right: 8px;
+}
+
+
         #map {
             width:  100%;
             height: 920px;
