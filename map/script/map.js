@@ -68,15 +68,44 @@ function renderCourseList() {
   });
 }
 
-// 코스 클릭 이벤트 핸들러
 async function onCourseClick(course) {
   try {
     await displayCourseMarkers(course.id);
     console.log(
       `${course.name} 코스가 선택되었습니다. 지도에 마커를 표시합니다.`
     );
+
+    // 코스 정보를 course-detail 섹션에 업데이트
+    const courseDetailElement = document.getElementById("course-detail");
+
+    // 상세 정보를 가져와서 표시
+    const courseData = await getCourseData(course.id);
+
+    if (courseData && courseData.length > 0) {
+      // 기존 내용을 지우고 새로운 내용을 추가
+      const detailContainer = document.getElementById("detail-container");
+      detailContainer.innerHTML = ""; // 기존 내용을 초기화
+
+      courseData.forEach((place) => {
+        console.log(place);
+        // 각 관광지의 정보 추가
+        const placeElement = document.createElement("div");
+        console.log(placeElement + 1111111111111111111111);
+        placeElement.classList.add("place-detail");
+
+        placeElement.innerHTML = `
+          <h3>${place.관광지}</h3>
+          <p>${place.코스설명}</p>
+          <p>주소: ${place.주소}</p>
+        `;
+
+        detailContainer.appendChild(placeElement);
+      });
+    }
+
+    courseDetailElement.style.display = "block";
   } catch (error) {
-    console.error(`코스 표시 중 오류가 발생했습니다:`, error);
+    console.error(`코스 표시 중 오류가 발생했습니다:`, error.message);
     alert(
       `코스 표시 중 오류가 발생했습니다. 자세한 내용은 콘솔을 확인해주세요.`
     );
@@ -154,7 +183,7 @@ function addMarker(position, title, content, num, courseNum, address) {
         box-shadow: 0 2px 4px rgba(0,0,0,0.3); 
         overflow: hidden;
       ">
-        <img src="../img/detail_img_${photoNum}.jpg" alt="" style="width: 100%; height: auto; border-radius: 10px;">
+        <img src="../img/detail_img_${photoNum}.jpg" alt="" style="width: 300px; height: 210px; border-radius: 10px;">
         <h3 style="margin: 10px 0 5px; font-size: 18px; text-align: left;">${title}</h3>
         <p style="margin: 5px 0; font-size: 14px; text-align: left; color: #333;">${content}</p>
         <p style="margin: 5px 0; font-size: 12px;  text-align: left;">주소: ${address}</p>
