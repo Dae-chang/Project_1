@@ -9,39 +9,22 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="../css/slide.css">
+    <link rel="stylesheet" href="../css/header.css">
+
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 </head>
 <body>
-<header>
-
-
-<nav class="header-nav">
-    <a href="#">HOME</a>
-    <a href="#">숙소 찾기</a>
-    <a href="#">추천영상</a>
-</nav>
-
-<div class="user-actions">
-    <a href="#">로그인</a>
-    <a href="#">마이페이지</a>
-</div>
-</header>
+    <?php include 'header.php'; ?>
 
     <main>
 
     <?php include 'slide.php'; ?>
-    <div class="white-space"></div>
 
-        <section id="attractions">
-        <h2>대구 관광지 코스</h2>
-        
-
-        </section>
         <!-- 흰색 바탕 추가 -->
         <div class="white-space"></div>
         <!-- 숙소&교통편 안내 -->
-        <section class="information-section">
+        <section class="information-section" id="information">
             <div class="information" id="info1">
                 <span>숙소를 찾으신다면?</span>
                 <a href="https://www.yeogi.com/domestic-accommodations?keyword=%EB%8C%80%EA%B5%AC&autoKeyword=&personal=2&freeForm=true/" target="_blank">
@@ -64,20 +47,28 @@
         <!-- 흰색 바탕 추가 -->
         <div class="white-space"></div>
         <!-- 대구소개 유튜브 -->
-        <section class="youtube-videos">
-            <h2>대구의 창 추천 영상 모음</h2>
-            <div class="video-container">
-                <div class="video small">
-                    <iframe width="300" height="300" src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    <p>대구 명소 소개 1</p>
+        <section class="youtube-videos" id="youtube">
+            <div class="video-container-1">
+                <div class="youtube-videos-title">
+                    <p>대구의 <span style="color: #204cab;">창</span></p>
+                    <p>추천 장소 <span style="color: #f52121;">영상</span></p>
                 </div>
-                <div class="video small">
-                    <iframe width="300" height="300" src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    <p>대구 명소 소개 2</p>
+                
+                <div class="video_small_container">
+                    <div class="video small">
+                        <iframe width="300" height="300" src="https://www.youtube.com/embed/tFwOQTc80DM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        
+                    </div>
+                    <div class="video small">
+                        <iframe width="300" height="300" src="https://www.youtube.com/embed/mWTJxF3d-Kk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        
+                    </div>
                 </div>
+            </div>
+            <div class="video-container-2">
                 <div class="video large">
-                    <iframe width="500" height="500" src="https://www.youtube.com/embed/VIDEO_ID_3" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    <p>대구 명소 소개 3</p>
+                    <iframe width="500" height="500" src="https://www.youtube.com/embed/neNAp8ggSoc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    
                 </div>
             </div>
         </section>
@@ -97,5 +88,7 @@
     
     <script src="../script/attractionsSlider.js"></script>
     <script src="../script/slideShow.js"></script>
+    
+
 </body>
 </html>
