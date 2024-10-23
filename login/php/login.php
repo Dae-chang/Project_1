@@ -12,11 +12,11 @@ $GOOGLE_LOGIN_URL = "https://accounts.google.com/o/oauth2/v2/auth?response_type=
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인 - 대구의 창</title>
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../../header/header.css">
 
 </head>
 <body>
-<?php include 'header.php'; ?>
+<?php include '../../header/header.php'; ?>
 
     <main>
         <h1>로그인</h1>
