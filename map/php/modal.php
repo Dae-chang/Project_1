@@ -17,7 +17,7 @@ foreach ($tourSpots as $spot) {
     }
 }
 
-
+// 관광지 정보가 없으면 에러 메시지 반환 
 if (!$spotInfo) {
     echo json_encode(['error' => '관광지 정보를 찾을 수 없습니다.']);
     exit;
