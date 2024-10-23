@@ -9,7 +9,7 @@ $spotId = isset($_GET['id']) ? $_GET['id'] : null;
 $spotName = isset($_GET['name']) ? $_GET['name'] : null;
 
 // 해당 관광지 정보 찾기
-$spotInfo = null;
+$spotInfo = null; 
 foreach ($tourSpots as $spot) {
     if (($spotId && $spot['관광지번호'] == $spotId) || ($spotName && $spot['관광지'] == $spotName)) {
         $spotInfo = $spot;
