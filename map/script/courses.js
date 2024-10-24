@@ -1,6 +1,4 @@
 // 코스 데이터
-
-// 코스 데이터
 const courses = [
   {
     id: "전역코스",
@@ -34,7 +32,7 @@ const courses = [
   },
 ];
 
-// 코스 목록 렌더링
+let allCoursesData;
 
 // 코스 목록 렌더링
 function renderCourseList() {
@@ -81,18 +79,21 @@ function renderCourseList() {
 
 // 하트 버튼 토글 함수
 function toggleHeart(courseId) {
-  const coursePlaces = allCoursesData.filter((place) => place.분류 === courseId);
+  const coursePlaces = allCoursesData.filter(
+    (place) => place.분류 === courseId
+  );
   coursePlaces.forEach((place) => {
-    const placeDetail = document.querySelector(`.place-detail[data-id="${place.관광지번호}"]`);
+    const placeDetail = document.querySelector(
+      `.place-detail[data-id="${place.관광지번호}"]`
+    );
     if (placeDetail) {
       const heartButton = placeDetail.querySelector(".heart-button");
-      heartButton.classList.toggle("active"); // 하트 버튼 상태 토글
+      //heartButton.classList.toggle("active"); // 하트 버튼 상태 토글
     }
   });
 }
 
 // JSON 파일에서 모든 코스 데이터를 가져오는 함수
-let allCoursesData = null;
 
 async function getCourseData(courseId) {
   try {
@@ -143,10 +144,10 @@ function displayPlaceDetails(coursePlaces) {
     const heartButton = document.createElement("button");
     heartButton.className = "heart-button";
     heartButton.setAttribute("data-name", place.관광지);
-    heartButton.innerHTML = "❤️";
-    if (bookmarkedPlaces.has(place.관광지)) {
+    heartButton.innerHTML = bookmarkedPlaces.has(place.관광지) ? "🤍" : "❤️";
+    /*if (bookmarkedPlaces.has(place.관광지)) {
       heartButton.classList.add("active");
-    }
+    }*/
     heartButton.addEventListener("click", (e) => {
       e.stopPropagation(); // 부모 클릭 이벤트 방지
       toggleHeart(place.관광지);
@@ -188,7 +189,9 @@ async function onCourseClick(course) {
     }
 
     await displayCourseMarkers(course.id);
-    console.log(`${course.name} 코스가 선택되었습니다. 지도에 마커를 표시합니다.`);
+    console.log(
+      `${course.name} 코스가 선택되었습니다. 지도에 마커를 표시합니다.`
+    );
 
     // 코스 데이터를 가져옵니다.
     const courseData = await getCourseData(course.id);
@@ -204,7 +207,7 @@ async function onCourseClick(course) {
         <button id="close-course-detail" style="float: right; background: none; border: none; font-size: 1.5em; cursor: pointer;">&times;</button>
       `;
 
-    // 하트 버튼 추가
+    // 하트 버튼 추가.
     const heartButton = document.createElement("button");
     heartButton.className = "heart-button";
     heartButton.innerHTML = "❤️";
@@ -232,14 +235,34 @@ async function onCourseClick(course) {
     courseDetailElement.scrollTop = 0;
   } catch (error) {
     console.error(`코스 표시 중 오류가 발생했습니다:`, error.message);
-    alert(`코스 표시 중 오류가 발생했습니다. 자세한 내용은 콘솔을 확인해주세요.`);
+    alert(
+      `코스 표시 중 오류가 발생했습니다. 자세한 내용은 콘솔을 확인해주세요.`
+    );
   }
+}
+
+function updateCourseBookmarkInDatabase(attraction) {
+  fetch("../php/bookmark_handler.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify({
+      attraction: encodeURIComponent(attraction),
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data));
 }
 
 // 코스의 모든 관광지 찜 상태 토글 함수
 function toggleHeartForCourse(courseId) {
-  const coursePlaces = allCoursesData.filter((place) => place.분류 === courseId);
-  const allPlacesBookmarked = coursePlaces.every((place) => bookmarkedPlaces.has(place.관광지));
+  const coursePlaces = allCoursesData.filter(
+    (place) => place.분류 === courseId
+  );
+  const allPlacesBookmarked = coursePlaces.every((place) =>
+    bookmarkedPlaces.has(place.관광지)
+  );
 
   coursePlaces.forEach((place) => {
     if (allPlacesBookmarked) {
@@ -266,6 +289,7 @@ function toggleHeart(placeName) {
   }
 
   updateHeartButtonStates();
+  updateCourseBookmarkInDatabase(placeName);
   console.log(`관광지 "${placeName}" 찜 상태 변경됨`);
   console.log("현재 찜한 관광지 목록:", Array.from(bookmarkedPlaces));
 
@@ -281,27 +305,47 @@ function updateHeartButtonStates() {
     const courseId = button.getAttribute("data-id");
 
     if (placeName) {
-      button.classList.toggle("active", bookmarkedPlaces.has(placeName));
+      //button.classList.toggle("active", bookmarkedPlaces.has(placeName));
+      button.innerHTML = bookmarkedPlaces.has(placeName) ? "🤍" : "❤️";
     } else if (courseId) {
-      const coursePlaces = allCoursesData.filter((place) => place.분류 === courseId);
-      const allPlacesBookmarked = coursePlaces.every((place) => bookmarkedPlaces.has(place.관광지));
-      button.classList.toggle("active", allPlacesBookmarked);
+      const coursePlaces = allCoursesData.filter(
+        (place) => place.분류 === courseId
+      );
+      const allPlacesBookmarked = coursePlaces.every((place) =>
+        bookmarkedPlaces.has(place.관광지)
+      );
+      //button.classList.toggle("active", allPlacesBookmarked);
     }
   });
 }
 
 // 나중에 DB에서 찜 상태를 가져오는 함수 (예시)
-function fetchBookmarkedPlacesFromDB() {
-  // 여기에 DB에서 찜한 관광지 목록을 가져오는 코드를 추가합니다.
-  // 예시로 빈 배열을 반환합니다.
-  return [];
+async function fetchBookmarkedPlacesFromDB() {
+  arr = [];
+  await fetch("../php/bookmark.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({}),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      data = JSON.parse(data);
+      data.forEach((e) => {
+        arr.push(e["attraction"]);
+      });
+    });
+  return arr;
 }
 
 // 페이지 로드 시 찜 상태 초기화
-function initializeHeartStates() {
-  // 나중에 DB에서 찜한 관광지 목록을 가져와 초기화합니다.
-  const bookmarkedPlacesArray = fetchBookmarkedPlacesFromDB();
+async function initializeHeartStates() {
+  // DB에서 찜한 관광지 목록을 가져와 초기화합니다.
+  getCourseData();
+  const bookmarkedPlacesArray = await fetchBookmarkedPlacesFromDB();
   bookmarkedPlaces = new Set(bookmarkedPlacesArray);
+  console.log("현재 찜한 관광지 목록:", Array.from(bookmarkedPlaces));
 
   updateHeartButtonStates();
 }

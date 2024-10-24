@@ -15,21 +15,23 @@ const GOOGLE_REDIRECT_URI = "http://localhost/google_login.php";
 const GOOGLE_SCOPE = "https://www.googleapis.com/auth/userinfo.email";
 const GOOGLE_STATE = "RANDOM_STATE";
 
-const SOCCIAL_REDIRECT_URI = "http://localhost/Project_1018_login/php_login.php";
+const SOCIAL_REDIRECT_URI = "http://localhost/Project_1/php_login.php";
 
-$DBCON = mysqli_connect('localhost', //DB주소
-'root', //DB아이디
- '', //DB비밀번호
-'social' //DB명
+$DBCON = mysqli_connect(
+    'localhost', //DB주소
+    'root', //DB아이디
+    '', //DB비밀번호
+    'daechang' //DB명
 );
 
 
-function fetch($url, $bodyData, $header = array()){
+function fetch($url, $bodyData, $header = array())
+{
 
 
     $body = json_encode($bodyData);
     $bodyString = http_build_query($bodyData);
-    $returnUrl = $url."?".$bodyString;
+    $returnUrl = $url . "?" . $bodyString;
 
     //curl은 다양한 프로토콜로 데이터 전송이 가능한 것
     $ch = curl_init();
@@ -47,4 +49,3 @@ function fetch($url, $bodyData, $header = array()){
     $data = json_decode($response, true);
     return $data;
 }
-?>
