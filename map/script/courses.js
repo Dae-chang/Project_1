@@ -48,11 +48,20 @@ function renderCourseList() {
         <h3>${course.name}</h3>
         <img src="${course.image}" alt="${course.name}">
         <p>${course.description}</p>
+        <button class="heart-button" data-id="${course.id}">❤️</button> <!-- 하트 버튼 추가 -->
         <div class="tags">
           <span>#가족여행</span><span>#친구</span><span>#먹거리</span>
         </div>
       `;
     courseElement.addEventListener("click", () => onCourseClick(course));
+
+    // 하트 버튼 클릭 이벤트 추가
+    const heartButton = courseElement.querySelector(".heart-button");
+    heartButton.addEventListener("click", (e) => {
+      e.stopPropagation(); // 부모 클릭 이벤트 방지
+      toggleHeart(course.id);
+    });
+
     courseListElement.appendChild(courseElement);
   });
 
@@ -69,6 +78,19 @@ function renderCourseList() {
     `;
   courseListElement.appendChild(myTourElement);
 }
+
+// 하트 버튼 토글 함수
+function toggleHeart(courseId) {
+  const coursePlaces = allCoursesData.filter((place) => place.분류 === courseId);
+  coursePlaces.forEach((place) => {
+    const placeDetail = document.querySelector(`.place-detail[data-id="${place.관광지번호}"]`);
+    if (placeDetail) {
+      const heartButton = placeDetail.querySelector(".heart-button");
+      heartButton.classList.toggle("active"); // 하트 버튼 상태 토글
+    }
+  });
+}
+
 // JSON 파일에서 모든 코스 데이터를 가져오는 함수
 let allCoursesData = null;
 
@@ -113,8 +135,20 @@ function displayPlaceDetails(coursePlaces) {
     placeDescription.className = "place-description";
     placeDescription.textContent = place.코스설명;
 
+    // 하트 버튼 추가
+    const heartButton = document.createElement("button");
+    heartButton.className = "heart-button";
+    heartButton.setAttribute("data-id", place.관광지번호);
+    heartButton.innerHTML = "❤️";
+    heartButton.addEventListener("click", (e) => {
+      e.stopPropagation(); // 부모 클릭 이벤트 방지
+      heartButton.classList.toggle("active"); // 하트 버튼 상태 토글
+      console.log(`관광지 ${place.관광지번호} 찜 상태 변경됨`);
+    });
+
     placeInfo.appendChild(placeName);
     placeInfo.appendChild(placeDescription);
+    placeInfo.appendChild(heartButton); // 하트 버튼을 정보에 추가
 
     placeDetail.appendChild(placeImage);
     placeDetail.appendChild(placeInfo);
@@ -137,3 +171,61 @@ function displayPlaceDetails(coursePlaces) {
 }
 
 // ... 기타 코스 관련 함수들 ...
+
+// 코스 클릭 이벤트 핸들러
+async function onCourseClick(course) {
+  try {
+    // 기존 오버레이가 열려 있다면 닫음
+    if (currentOverlay) {
+      currentOverlay.setMap(null);
+      currentOverlay = null;
+    }
+
+    await displayCourseMarkers(course.id);
+    console.log(`${course.name} 코스가 선택되었습니다. 지도에 마커를 표시합니다.`);
+
+    // 코스 데이터를 가져옵니다.
+    const courseData = await getCourseData(course.id);
+
+    // 코스 상세 정보 섹션을 표시합니다.
+    const courseDetailElement = document.getElementById("course-detail");
+    courseDetailElement.style.display = "block";
+
+    // detail-title에 코스 이름과 닫기 버튼을 추가합니다.
+    const detailTitleElement = document.getElementById("detail-title");
+    detailTitleElement.innerHTML = `
+        ${course.name} <span style="color: #077fff;">코스</span>
+        <button id="close-course-detail" style="float: right; background: none; border: none; font-size: 1.5em; cursor: pointer;">&times;</button>
+      `;
+
+    // 하트 버튼 추가
+    const heartButton = document.createElement("button");
+    heartButton.className = "heart-button";
+    heartButton.innerHTML = "❤️";
+    heartButton.addEventListener("click", (e) => {
+      e.stopPropagation(); // 부모 클릭 이벤트 방지
+      toggleHeart(course.id);
+    });
+
+    // 코스 상세 정보에 하트 버튼 추가
+    courseDetailElement.appendChild(heartButton);
+
+    // 닫기 버튼에 이벤트 리스너를 추가합니다.
+    const closeButton = document.getElementById("close-course-detail");
+    closeButton.addEventListener("click", () => {
+      const courseDetailElement = document.getElementById("course-detail");
+      courseDetailElement.style.display = "none";
+    });
+
+    if (courseData && courseData.length > 0) {
+      // displayPlaceDetails 함수를 호출하여 장소 상세 정보를 표시합니다.
+      displayPlaceDetails(courseData);
+    }
+
+    // 스크롤바를 최상단으로 이동
+    courseDetailElement.scrollTop = 0;
+  } catch (error) {
+    console.error(`코스 표시 중 오류가 발생했습니다:`, error.message);
+    alert(`코스 표시 중 오류가 발생했습니다. 자세한 내용은 콘솔을 확인해주세요.`);
+  }
+}

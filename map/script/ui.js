@@ -103,3 +103,12 @@ function closeModal() {
     existingModal.remove();
   }
 }
+
+// 하트 버튼 클릭 이벤트 추가
+document.addEventListener("click", function (event) {
+  if (event.target.classList.contains("heart-button")) {
+    const spotId = event.target.getAttribute("data-id");
+    event.target.classList.toggle("active"); // 하트 버튼 상태 토글
+    console.log(`관광지 ${spotId} 찜 상태 변경됨`);
+  }
+});
