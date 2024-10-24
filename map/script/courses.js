@@ -46,19 +46,13 @@ function renderCourseList() {
         <h3>${course.name}</h3>
         <img src="${course.image}" alt="${course.name}">
         <p>${course.description}</p>
-        <button class="heart-button" data-id="${course.id}">❤️</button>
         <div class="tags">
           <span>#가족여행</span><span>#친구</span><span>#먹거리</span>
         </div>
       `;
     courseElement.addEventListener("click", () => onCourseClick(course));
 
-    // 하트 버튼 클릭 이벤트 추가
-    const heartButton = courseElement.querySelector(".heart-button");
-    heartButton.addEventListener("click", (e) => {
-      e.stopPropagation(); // 부모 클릭 이벤트 방지
-      toggleHeartForCourse(course.id);
-    });
+    // 하트 버튼 관련 코드 제거
 
     courseListElement.appendChild(courseElement);
   });
@@ -255,31 +249,6 @@ function updateCourseBookmarkInDatabase(attraction) {
     .then((data) => console.log(data));
 }
 
-// 코스의 모든 관광지 찜 상태 토글 함수
-function toggleHeartForCourse(courseId) {
-  const coursePlaces = allCoursesData.filter(
-    (place) => place.분류 === courseId
-  );
-  const allPlacesBookmarked = coursePlaces.every((place) =>
-    bookmarkedPlaces.has(place.관광지)
-  );
-
-  coursePlaces.forEach((place) => {
-    if (allPlacesBookmarked) {
-      bookmarkedPlaces.delete(place.관광지);
-    } else {
-      bookmarkedPlaces.add(place.관광지);
-    }
-  });
-
-  updateHeartButtonStates();
-  console.log(`코스 "${courseId}" 찜 상태 변경됨`);
-  console.log("현재 찜한 관광지 목록:", Array.from(bookmarkedPlaces));
-
-  // 여기에 나중에 DB 연동 코드를 추가할 수 있습니다.
-  // 예: updateCourseBookmarkInDatabase(courseId, !allPlacesBookmarked);
-}
-
 // 개별 관광지 하트 버튼 토글 함수
 function toggleHeart(placeName) {
   if (bookmarkedPlaces.has(placeName)) {
@@ -317,26 +286,6 @@ function updateHeartButtonStates() {
       //button.classList.toggle("active", allPlacesBookmarked);
     }
   });
-}
-
-// 나중에 DB에서 찜 상태를 가져오는 함수 (예시)
-async function fetchBookmarkedPlacesFromDB() {
-  arr = [];
-  await fetch("../php/bookmark.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({}),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      data = JSON.parse(data);
-      data.forEach((e) => {
-        arr.push(e["attraction"]);
-      });
-    });
-  return arr;
 }
 
 // 페이지 로드 시 찜 상태 초기화
