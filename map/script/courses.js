@@ -48,7 +48,7 @@ function renderCourseList() {
         <h3>${course.name}</h3>
         <img src="${course.image}" alt="${course.name}">
         <p>${course.description}</p>
-        <button class="heart-button" data-id="${course.id}">❤️</button> <!-- 하트 버튼 추가 -->
+        <button class="heart-button" data-id="${course.id}">❤️</button>
         <div class="tags">
           <span>#가족여행</span><span>#친구</span><span>#먹거리</span>
         </div>
@@ -59,7 +59,7 @@ function renderCourseList() {
     const heartButton = courseElement.querySelector(".heart-button");
     heartButton.addEventListener("click", (e) => {
       e.stopPropagation(); // 부모 클릭 이벤트 방지
-      toggleHeart(course.id);
+      toggleHeartForCourse(course.id);
     });
 
     courseListElement.appendChild(courseElement);
@@ -111,6 +111,10 @@ async function getCourseData(courseId) {
     return [];
   }
 }
+
+// 전역 변수로 찜한 관광지 목록을 관리합니다.
+let bookmarkedPlaces = new Set();
+
 function displayPlaceDetails(coursePlaces) {
   const placeDetailsContainer = document.getElementById("place-details");
   placeDetailsContainer.innerHTML = "";
@@ -138,12 +142,14 @@ function displayPlaceDetails(coursePlaces) {
     // 하트 버튼 추가
     const heartButton = document.createElement("button");
     heartButton.className = "heart-button";
-    heartButton.setAttribute("data-id", place.관광지번호);
+    heartButton.setAttribute("data-name", place.관광지);
     heartButton.innerHTML = "❤️";
+    if (bookmarkedPlaces.has(place.관광지)) {
+      heartButton.classList.add("active");
+    }
     heartButton.addEventListener("click", (e) => {
       e.stopPropagation(); // 부모 클릭 이벤트 방지
-      heartButton.classList.toggle("active"); // 하트 버튼 상태 토글
-      console.log(`관광지 ${place.관광지번호} 찜 상태 변경됨`);
+      toggleHeart(place.관광지);
     });
 
     placeInfo.appendChild(placeName);
@@ -229,3 +235,76 @@ async function onCourseClick(course) {
     alert(`코스 표시 중 오류가 발생했습니다. 자세한 내용은 콘솔을 확인해주세요.`);
   }
 }
+
+// 코스의 모든 관광지 찜 상태 토글 함수
+function toggleHeartForCourse(courseId) {
+  const coursePlaces = allCoursesData.filter((place) => place.분류 === courseId);
+  const allPlacesBookmarked = coursePlaces.every((place) => bookmarkedPlaces.has(place.관광지));
+
+  coursePlaces.forEach((place) => {
+    if (allPlacesBookmarked) {
+      bookmarkedPlaces.delete(place.관광지);
+    } else {
+      bookmarkedPlaces.add(place.관광지);
+    }
+  });
+
+  updateHeartButtonStates();
+  console.log(`코스 "${courseId}" 찜 상태 변경됨`);
+  console.log("현재 찜한 관광지 목록:", Array.from(bookmarkedPlaces));
+
+  // 여기에 나중에 DB 연동 코드를 추가할 수 있습니다.
+  // 예: updateCourseBookmarkInDatabase(courseId, !allPlacesBookmarked);
+}
+
+// 개별 관광지 하트 버튼 토글 함수
+function toggleHeart(placeName) {
+  if (bookmarkedPlaces.has(placeName)) {
+    bookmarkedPlaces.delete(placeName);
+  } else {
+    bookmarkedPlaces.add(placeName);
+  }
+
+  updateHeartButtonStates();
+  console.log(`관광지 "${placeName}" 찜 상태 변경됨`);
+  console.log("현재 찜한 관광지 목록:", Array.from(bookmarkedPlaces));
+
+  // 여기에 나중에 DB 연동 코드를 추가할 수 있습니다.
+  // 예: updateBookmarkInDatabase(placeName, bookmarkedPlaces.has(placeName));
+}
+
+// 모든 하트 버튼 상태 업데이트 함수
+function updateHeartButtonStates() {
+  const heartButtons = document.querySelectorAll(".heart-button");
+  heartButtons.forEach((button) => {
+    const placeName = button.getAttribute("data-name");
+    const courseId = button.getAttribute("data-id");
+
+    if (placeName) {
+      button.classList.toggle("active", bookmarkedPlaces.has(placeName));
+    } else if (courseId) {
+      const coursePlaces = allCoursesData.filter((place) => place.분류 === courseId);
+      const allPlacesBookmarked = coursePlaces.every((place) => bookmarkedPlaces.has(place.관광지));
+      button.classList.toggle("active", allPlacesBookmarked);
+    }
+  });
+}
+
+// 나중에 DB에서 찜 상태를 가져오는 함수 (예시)
+function fetchBookmarkedPlacesFromDB() {
+  // 여기에 DB에서 찜한 관광지 목록을 가져오는 코드를 추가합니다.
+  // 예시로 빈 배열을 반환합니다.
+  return [];
+}
+
+// 페이지 로드 시 찜 상태 초기화
+function initializeHeartStates() {
+  // 나중에 DB에서 찜한 관광지 목록을 가져와 초기화합니다.
+  const bookmarkedPlacesArray = fetchBookmarkedPlacesFromDB();
+  bookmarkedPlaces = new Set(bookmarkedPlacesArray);
+
+  updateHeartButtonStates();
+}
+
+// 페이지 로드 시 찜 상태 초기화 함수 호출
+document.addEventListener("DOMContentLoaded", initializeHeartStates);
