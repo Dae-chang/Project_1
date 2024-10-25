@@ -1,5 +1,5 @@
 <?php
-require_once './env.php';
+require_once 'env.php';
 
 function idChecheckQuery($socialId, $socialType, $DBCON)
 {

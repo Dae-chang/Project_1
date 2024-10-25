@@ -19,7 +19,6 @@
 
 <body>
     <?php include '../../header/header.php';
-    session_start();
     print_r("SESSION_userID: " . $_SESSION['userID']);
     print_r("<br/   >");
     print_r("SESSION_userName: " . $_SESSION['userName']);

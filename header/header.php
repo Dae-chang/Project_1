@@ -1,13 +1,21 @@
+<?php
+session_start(); // 세션 시작
+?>
 
 <header id="home">
     <nav class="header-nav">
         <a href="../../index/php/index.php#home">HOME</a>
         <a href="../../index/php/index.php#information">숙소 찾기</a>
-        <a href="../../index/php/index.php#youtube">추천영상</a>
+        <a href="../../index/php/index.php#youtube">추천 영상</a>
+        <a href="../../map/php/map.php">추천 여행지</a>
     </nav>
 
     <div class="user-actions">
-        <a href="../../login/php/login.php">로그인</a>
+        <?php if(isset($_SESSION['userID'])): ?>
+            <a href="../../logout.php">로그아웃</a>
+        <?php else: ?>
+            <a href="../../login/php/login.php">로그인</a>
+        <?php endif; ?>
         <a href="../../mypage/php/mypage.php">마이페이지</a>
     </div>
 
@@ -18,7 +26,11 @@
     </div>
 
     <div class="side-menu">
-        <a href="../../login/php/login.php">로그인</a>
+        <?php if(isset($_SESSION['userID'])): ?>
+            <a href="../../ㅉlogout.php">로그아웃</a>
+        <?php else: ?>
+            <a href="../../login/php/login.php">로그인</a>
+        <?php endif; ?>
         <a href="../../mypage/php/mypage.php">마이페이지</a>
     </div>
 
