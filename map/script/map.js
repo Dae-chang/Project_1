@@ -66,8 +66,43 @@ function removeMarkers() {
 }
 
 // 코스의 모든 관광지 에 표시하는 함수
-async function displayCourseMarkers(courseId) {
+async function displayCourseMarkers(courseId, bookmarkedPlaces) {
   // 기존 오버레이 제거
+
+  if (!courseId) {
+    console.log("북마크된 장소:", bookmarkedPlaces);
+
+    // 기존 오버레이 제거
+    if (currentOverlay) {
+      currentOverlay.setMap(null);
+      currentOverlay = null;
+    }
+
+    removeMarkers();
+
+    const bounds = new kakao.maps.LatLngBounds();
+
+    const markerPromises = bookmarkedPlaces.map(async (place) => {
+      try {
+        const position = await getCoordinates(place.주소);
+        addMarker(position, place);
+        bounds.extend(position);
+      } catch (error) {
+        console.error(`${place.관광지}의 위치를 표시할 수 없습니다:`, error);
+      }
+    });
+
+    await Promise.all(markerPromises);
+
+    if (markers.length > 0) {
+      map.setBounds(bounds);
+    } else {
+      console.warn("표시할 마커가 없습니다.");
+    }
+
+    console.log("북마크된 장소 마커 추가 완료");
+  }
+
   if (currentOverlay) {
     currentOverlay.setMap(null);
     currentOverlay = null;
