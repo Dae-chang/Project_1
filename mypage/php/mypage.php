@@ -13,7 +13,9 @@
 
     <main>
         <section id="favorites">
+            <div class="title">
             <p>내가 찜한 여행지 목록</p>
+            </div>
             <div class="favorites-grid">
                 <?php
                 require_once '../../env.php';
@@ -66,11 +68,11 @@
         </section>
 
     </main>
-
+    <div class="footerPadding">
     <footer>
         <p>&copy; 2023 대구 관광지 소개. 모든 권리 보유.</p>
     </footer>
-
+    </div>
     <script>
         function changePage(page) {
             window.location.href = `?page=${page}`;
