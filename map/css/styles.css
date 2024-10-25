@@ -14,7 +14,6 @@ main {
   overflow: hidden;
 }
 
-
 #course-list,
 #course-detail {
   width: 330px;
@@ -160,54 +159,7 @@ main {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
-
 }
-
-/* 모바일 모드 */
-@media (max-width: 768px) {
-  main {
-    flex-direction: column;
-    height: calc(100% - 60px);
-  }
-
-  #course-list,
-  #course-detail {
-    width: 100%;
-    height: calc(40% - 20px); /* 패딩을 고려하여 높이 조정 */
-  }
-
-  #map {
-    height: 60%;
-  }
-
-  .course-item {
-    flex-direction: row;
-    padding: 10px 5px;
-    width: calc(100% - 30px); /* 패딩을 고려하여 너비 조정 */
-    margin: 15px 15px; /* 좌우 마진 추가 */
-  }
-
-  .course-item img {
-    width: 60px;
-    height: 60px;
-    margin-right: 10px;
-  }
-
-  .course-details h3 {
-    font-size: 14px;
-  }
-
-  .course-details p {
-    font-size: 12px;
-    color: #666;
-  }
-
-  .course-item {
-    width: calc(100% - 30px);
-    margin: 15px auto; /* 좌우 마진을 auto로 변경하여 중앙 정렬 */
-  }
-}
-
 h3,
 .place-name {
   font-family: "Noto Sans KR", sans-serif;
@@ -351,4 +303,513 @@ h3,
 
 .overlay-close:hover {
   background: rgba(0, 0, 0, 0.7);
+}
+@media (max-width: 768px) {
+  #map {
+    flex: 1;
+    height: 62%; /* 지도의 높이 조정 */
+  }
+
+  #course-list {
+    width: 100%; /* 너비를 100%로 설정 */
+    height: 38%; /* 화면 하단에 50% 표시 */
+    position: absolute; /* 절대 위치로 설정하여 아래로 고정 */
+    bottom: 0; /* 화면 하단에 고정 */
+    overflow-x: auto; /* 가로 스크롤 가능 */
+    overflow-y: hidden; /* 세로 스크롤 숨김 */
+    padding: 15px 0; /* 상단 패딩 증가 */
+    border-top: 1px solid #ddd; /* 상단 경계선 추가 */
+    display: flex; /* 플렉스 박스 사용 */
+    flex-direction: row; /* 가로 방향 정렬 */
+    justify-content: flex-start; /* 아이템을 왼쪽 정렬 */
+    flex-wrap: nowrap; /* 아이템이 줄 바꿈 되지 않도록 설정 */
+  }
+
+  #course-detail {
+    display: flex;
+    flex-direction: row; /* 가로로 정렬 */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 38%; /* 높이 조정 */
+    background-color: #f9f9f9; /* 배경 색상 변경 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    overflow-x: hidden; /* 가로 스크롤 가능 */
+    overflow-y: hidden; /* 세로 스크롤 숨김 */
+    margin: 0;
+    padding: 15px 25px; /* 패딩 조정 (상단 패딩 감소) */
+    box-sizing: border-box;
+    white-space: nowrap; /* 내용이 줄 바꿈 없이 나열되도록 설정 */
+  }
+  #place-details {
+    display: flex;
+    overflow-x: auto;
+    flex-direction: row; /* 가로로 나열 */
+    gap: 20px; /* 요소 간의 간격 증가 */
+  }
+
+  #place-details .place-detail {
+    display: flex; /* flex 사용 */
+    flex-direction: column; /* 각 장소 상세 정보는 세로로 배치 */
+    min-width: 180px; /* 각 장소 상세 정보의 최소 너비 설정 */
+    max-width: 180px; /* 각 장소 상세 정보의 최대 너비 설정 */
+    height: 220px; /* 높이 증가 */
+    border: 1px solid #ccc; /* 테두리 색상 변경 */
+    border-radius: 8px; /* 테두리 둥글게 */
+    overflow: hidden;
+    padding: 20px 0; /* 좌우 패딩 증가 */
+    margin: 0; /* 마진 제거 */
+    box-sizing: border-box; /* padding 포함해서 너비 계산 */
+    background-color: #ffffff; /* 카드 배경 색상 */
+    transition: box-shadow 0.3s ease; /* 마우스 오버 시 애니메이션 추가 */
+  }
+
+  #place-details .place-detail:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* 마우스 오버 시 그림자 효과 */
+  }
+
+  #place-details .place-image {
+    width: 90%; /* 이미지 너비를 카드에 맞춤 */
+    height: 100px; /* 고정된 높이 증가 */
+    object-fit: cover; /* 비율 유지하며 자르기 */
+    border-radius: 5px; /* 이미지 모서리 둥글게 */
+    margin: 0; /* 이미지와 정보 사이 마진 제거 */
+  }
+
+  #place-details .place-info {
+    text-align: center; /* 가운데 정렬 */
+    margin: 0; /* 마진 제거 */
+  }
+
+  #place-details .place-name {
+    font-size: 20px; /* 폰트 크기 증가 */
+    font-weight: bold; /* 폰트 두껍게 */
+    color: #333; /* 텍스트 색상 */
+    margin: 5px 0; /* 위아래 마진은 유지 */
+  }
+
+  #place-details .heart-button {
+    text-align: center;
+    background: none;
+    border: none;
+    font-size: 28px; /* 버튼 크기 증가 */
+    cursor: pointer;
+    margin-top: 5px; /* 버튼 위쪽 여백 유지 */
+    transition: color 0.3s ease; /* 색상 변화 애니메이션 */
+  }
+
+  #place-details .heart-button.active {
+    color: red; /* 활성화된 버튼 색상 */
+  }
+
+  #place-details p {
+    display: none; /* 이 부분은 숨김 유지 */
+  }
+
+  .course-item {
+    display: flex; /* 플렉스 박스 사용 */
+    flex-direction: column; /* 세로 방향 정렬 */
+    justify-content: center; /* 수직 중앙 정렬 */
+    align-items: center; /* 수평 중앙 정렬 */
+    border: 1px solid #ddd; /* 경계선 색상 변경 */
+    border-radius: 10px; /* 둥근 모서리 */
+    padding: 20px; /* 패딩 증가 */
+    margin: 20px 10px 10px 10px; /* 상단 마진 추가 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    font-family: "Arial", sans-serif;
+    cursor: pointer; /* 포인터를 클릭 모양으로 변경 */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* 부드러운 배경색 전환 효과 */
+    width: 240px; /* 각 항목의 고정 너비 증가 */
+    height: 300px; /* 높이 추가 */
+    box-sizing: border-box; /* 패딩과 테두리를 너비에 포함 */
+    background-color: #f9f9f9; /* 배경색 추가 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    flex: none; /* 각 항목이 고정 너비를 가지도록 설정 */
+  }
+
+  .course-item:hover {
+    background-color: #effcff; /* 호버 시 배경색 변경 */
+    transform: scale(1.05); /* 호버 시 약간 확대 효과 */
+  }
+
+  .course-item h3 {
+    font-size: 18px; /* 폰트 크기 조정 */
+    margin: 0 0 5px 0; /* 하단 마진 조정 */
+    font-weight: bold;
+  }
+
+  .course-item img {
+    width: 100%; /* 이미지 너비 조정 */
+    height: 140px; /* 높이 증가 */
+    border-radius: 5px; /* 이미지 둥근 모서리 */
+    max-width: 100%; /* 최대 너비 제한 */
+  }
+
+  .course-item p {
+    font-size: 14px; /* 폰트 크기 조정 */
+    color: #666;
+    margin: 5px 0; /* 상하 마진 조정 */
+  }
+
+  .course-item .tags {
+    margin-top: 10px;
+    font-size: 14px; /* 폰트 크기 증가 */
+    color: #666;
+  }
+
+  .course-item .tags span {
+    margin-right: 10px; /* 태그 간격 증가 */
+  }
+
+  .custom-overlay {
+    position: relative;
+    width: 320px; /* 너비 증가 */
+    height: 380px; /* 높이 증가 */
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .overlay-content {
+    padding: 15px; /* 패딩 증가 */
+  }
+
+  .overlay-image {
+    width: 100%; /* 너비를 100%로 설정 */
+    height: 180px; /* 높이 증가 */
+    object-fit: cover;
+    border-radius: 5px;
+  }
+
+  .overlay-info {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px; /* 간격 증가 */
+  }
+
+  .overlay-title {
+    font-size: 30px; /* 폰트 크기 증가 */
+    font-weight: bold;
+    margin: 5px 0; /* 간격 증가 */
+  }
+
+  .overlay-description {
+    font-size: 20px; /* 폰트 크기 증가 */
+    margin: 5px 0; /* 간격 증가 */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* 최대 줄 수 설정 */
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+  }
+
+  .overlay-address {
+    font-size: 12px; /* 폰트 크기 증가 */
+    color: #666;
+    margin: 5px 0; /* 간격 증가 */
+  }
+
+  .overlay-button {
+    align-self: flex-end;
+    background-color: #077fff;
+    color: white;
+    border: none;
+    padding: 6px 12px; /* 버튼 패딩 증가 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px; /* 버튼 폰트 크기 증가 */
+    margin-top: 10px; /* 간격 증가 */
+  }
+
+  .overlay-arrow {
+    position: absolute;
+    bottom: -8px; /* 위치 조정 */
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent; /* 크기 증가 */
+    border-right: 8px solid transparent; /* 크기 증가 */
+    border-top: 8px solid white; /* 크기 증가 */
+    transform: translateX(-50%);
+  }
+
+  .overlay-close {
+    position: absolute;
+    top: 8px; /* 위치 조정 */
+    right: 8px; /* 위치 조정 */
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px; /* 크기 증가 */
+    height: 30px; /* 크기 증가 */
+    font-size: 16px; /* 폰트 크기 증가 */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+
+  .overlay-close:hover {
+    background: rgba(0, 0, 0, 0.7);
+  }
+}
+
+@media (max-width: 436px) {
+  #map {
+    flex: 1;
+    height: 54%; /* 지도의 높이 */
+  }
+
+  #course-list {
+    width: 100%; /* 너비를 100%로 설정 */
+    height: 45%; /* 화면 하단에 35%만 표시 */
+    position: absolute; /* 절대 위치로 설정하여 아래로 고정 */
+    bottom: 0; /* 화면 하단에 고정 */
+    overflow-x: auto; /* 가로 스크롤 가능 */
+    overflow-y: hidden; /* 세로 스크롤 숨김 */
+    padding: 10px 0; /* 상단 패딩 */
+    border-top: 1px solid #ddd; /* 상단 경계선 추가 */
+    display: flex; /* 플렉스 박스 사용 */
+    flex-direction: row; /* 가로 방향 정렬 */
+    justify-content: flex-start; /* 아이템을 왼쪽 정렬 */
+    flex-wrap: nowrap; /* 아이템이 줄 바꿈 되지 않도록 설정 */
+  }
+  #detail-title {
+    position: sticky; /* 스크롤 시 위치 고정 */
+  }
+  #course-detail {
+    display: flex;
+    flex-direction: row; /* 가로로 정렬 */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 45%;
+    background-color: #f9f9f9; /* 배경 색상 변경 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    overflow-x: hidden; /* 가로 스크롤 가능 */
+    overflow-y: hidden; /* 세로 스크롤 숨김 */
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    white-space: nowrap; /* 내용이 줄 바꿈 없이 나열되도록 설정 */
+  }
+
+  #place-details {
+    display: flex;
+    overflow-x: auto;
+    flex-direction: row; /* 가로로 나열 */
+    gap: 15px; /* 요소 간의 간격 */
+  }
+
+  #place-details .place-detail {
+    display: flex; /* flex 사용 */
+    flex-direction: column; /* 각 장소 상세 정보는 세로로 배치 */
+    min-width: 150px; /* 각 장소 상세 정보의 최소 너비 설정 */
+    max-width: 150px; /* 각 장소 상세 정보의 최대 너비 설정 */
+    height: 200px; /* 높이 증가 */
+    border: 1px solid #ccc; /* 테두리 색상 변경 */
+    border-radius: 8px; /* 테두리 둥글게 */
+    overflow: hidden;
+    padding: 15px 0; /* 좌우 패딩 0으로 설정 */
+    margin: 0; /* 마진 제거 */
+    box-sizing: border-box; /* padding 포함해서 너비 계산 */
+    background-color: #ffffff; /* 카드 배경 색상 */
+    transition: box-shadow 0.3s ease; /* 마우스 오버 시 애니메이션 추가 */
+  }
+
+  #place-details .place-detail:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* 마우스 오버 시 그림자 효과 */
+  }
+
+  #place-details .place-image {
+    width: 90%; /* 이미지 너비를 카드에 맞춤 */
+    height: 90px; /* 고정된 높이 설정 */
+    object-fit: cover; /* 비율 유지하며 자르기 */
+    border-radius: 5px; /* 이미지 모서리 둥글게 */
+    margin: 0; /* 이미지와 정보 사이 마진 제거 */
+  }
+
+  #place-details .place-info {
+    text-align: center; /* 가운데 정렬 */
+    margin: 0; /* 마진 제거 */
+  }
+
+  #place-details .place-name {
+    font-size: 18px; /* 폰트 크기 증가 */
+    font-weight: bold; /* 폰트 두껍게 */
+    color: #333; /* 텍스트 색상 */
+    margin: 5px 0; /* 위아래 마진은 유지 */
+  }
+
+  #place-details .heart-button {
+    text-align: center;
+    background: none;
+    border: none;
+    font-size: 24px; /* 버튼 크기 증가 */
+    cursor: pointer;
+    margin-top: 5px; /* 버튼 위쪽 여백 유지 */
+    transition: color 0.3s ease; /* 색상 변화 애니메이션 */
+  }
+
+  #place-details .heart-button.active {
+    color: red; /* 활성화된 버튼 색상 */
+  }
+
+  #place-details p {
+    display: none; /* 이 부분은 숨김 유지 */
+  }
+
+  .course-item {
+    display: flex; /* 플렉스 박스 사용 */
+    flex-direction: column; /* 세로 방향 정렬 */
+    justify-content: center; /* 수직 중앙 정렬 */
+    align-items: center; /* 수평 중앙 정렬 */
+    border: 1px solid #ddd; /* 경계선 색상 변경 */
+    border-radius: 10px; /* 둥근 모서리 */
+    padding: 15px; /* 패딩 추가 */
+    margin: 10px; /* 상하 좌우 마진 추가 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    font-family: "Arial", sans-serif;
+    cursor: pointer; /* 포인터를 클릭 모양으로 변경 */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* 부드러운 배경색 전환 효과 */
+    width: 220px; /* 각 항목의 고정 너비 */
+    height: 300px; /* 높이를 추가하여 중앙 정렬이 가능하도록 설정 */
+    box-sizing: border-box; /* 패딩과 테두리를 너비에 포함 */
+    background-color: #f9f9f9; /* 배경색 추가 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    flex: none; /* 각 항목이 고정 너비를 가지도록 설정 */
+  }
+
+  .course-item:hover {
+    background-color: #effcff; /* 호버 시 배경색 변경 */
+    transform: scale(1.05); /* 호버 시 약간 확대 효과 */
+  }
+
+  .course-item h3 {
+    font-size: 16px; /* 폰트 크기 조정 */
+    margin: 0 0 5px 0; /* 하단 마진 조정 */
+    font-weight: bold;
+  }
+
+  .course-item img {
+    width: 100%; /* 이미지 너비 조정 */
+    height: 130px;
+    border-radius: 5px; /* 이미지 둥근 모서리 */
+    max-width: 100%; /* 최대 너비 제한 */
+  }
+
+  .course-item p {
+    font-size: 12px; /* 폰트 크기 조정 */
+    color: #666;
+    margin: 5px 0; /* 상하 마진 조정 */
+  }
+
+  .course-item .tags {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #666;
+  }
+
+  .course-item .tags span {
+    margin-right: 8px;
+  }
+  .custom-overlay {
+    position: relative;
+    width: 300px; /* 너비 줄임 */
+    height: 300px; /* 높이 줄임 */
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .overlay-content {
+    padding: 10px; /* 패딩 줄임 */
+  }
+
+  .overlay-image {
+    width: 100%; /* 너비를 100%로 설정 */
+    height: 150px; /* 높이 줄임 */
+    object-fit: cover;
+    border-radius: 5px;
+  }
+
+  .overlay-info {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px; /* 간격 줄임 */
+  }
+
+  .overlay-title {
+    font-size: 18px; /* 폰트 크기 줄임 */
+    font-weight: bold;
+    margin: 3px 0; /* 간격 줄임 */
+  }
+
+  .overlay-description {
+    font-size: 10px; /* 폰트 크기 줄임 */
+    margin: 3px 0; /* 간격 줄임 */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* 최대 줄 수 설정 */
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+  }
+
+  .overlay-address {
+    font-size: 6px; /* 폰트 크기 줄임 */
+    color: #666;
+    margin: 3px 0; /* 간격 줄임 */
+  }
+
+  .overlay-button {
+    align-self: flex-end;
+    background-color: #077fff;
+    color: white;
+    border: none;
+    padding: 4px 8px; /* 버튼 패딩 줄임 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 10px; /* 버튼 폰트 크기 줄임 */
+    margin-top: 5px;
+  }
+
+  .overlay-arrow {
+    position: absolute;
+    bottom: -6px; /* 위치 조정 */
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid white;
+    transform: translateX(-50%);
+  }
+
+  .overlay-close {
+    position: absolute;
+    top: 6px; /* 위치 조정 */
+    right: 6px; /* 위치 조정 */
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px; /* 크기 줄임 */
+    height: 25px; /* 크기 줄임 */
+    font-size: 14px; /* 폰트 크기 줄임 */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+
+  .overlay-close:hover {
+    background: rgba(0, 0, 0, 0.7);
+  }
 }
