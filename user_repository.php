@@ -1,5 +1,6 @@
 <?php
-require_once './env.php';
+// env.php 파일의 경로를 상대 경로로 변경
+require_once __DIR__ . '/env.php';
 
 function idChecheckQuery($socialId, $socialType, $DBCON)
 {
@@ -10,7 +11,7 @@ function idChecheckQuery($socialId, $socialType, $DBCON)
     return $result;
 };
 
-function userRegisterQuery($socialId, $socialType, $DBCON)
+function userRegisterQuery($socialId, $socialType, $userName, $DBCON)
 {
     date_default_timezone_set('Asia/Seoul');
     $date = date("y-m-d h:i:s");
@@ -24,8 +25,19 @@ function userRegisterQuery($socialId, $socialType, $DBCON)
     '{$socialId}',
     '{$socialType}',
     '{$date}',
-    '{$socialId}'
+    '{$userName}'
     )";
     $result = mysqli_query($DBCON, $insertQuery);
     return $result;
+}
+
+function getUserFavorites($userId, $DBCON)
+{
+    $query = "SELECT attraction FROM bookmark WHERE user = '{$userId}'";
+    $result = mysqli_query($DBCON, $query);
+    $favorites = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $favorites[] = $row;
+    }
+    return $favorites;
 }

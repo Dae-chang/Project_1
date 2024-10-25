@@ -6,6 +6,7 @@ $code = $_GET['code'];
 //클래스 설정
 $SocialLogin;
 
+
 //구글
 if (array_key_exists('scope', $_GET)) {
     $SocialLogin = new SocialLoginController(
@@ -96,9 +97,9 @@ class SocialLoginController
         $profileRequestHeader = [
             "Authorization: Bearer {$accessToken}"
         ];
-        $profile = fetch($this->profileRequestUrl, [], $profileRequestHeader);
+        $profile = fetch($this->profileRequestUrl, [], $profileRequestHeader); //유저 정보
         $socialId = $this->socialType == "NAVER" ?
-            $profile['response'][$this->socialIdSelect] :
+            $profile['response'][$this->socialIdSelect] : //네이버는 response를 따로 추가해줘야함
             $profile[$this->socialIdSelect];
 
 
@@ -109,13 +110,26 @@ class SocialLoginController
         if ($row) {
             $_SESSION['userID'] = $row['Key'];
 
+
+
+            $_SESSION['userName'] = $row['name'];
+
             echo "<script>";
             echo "window.location.href='./index/php/';";
             echo "</script>";
             exit;
         } else {
 
-            $registerResult = userRegisterQuery($socialId, $this->socialType, $this->DBCON);
+            $userName = $this->socialType == "NAVER"
+                ? $profile['response']['name']
+                : ($this->socialType == "KAKAO"
+                    ? $profile['properties']['nickname']
+                    : $profile['name']);
+            $_SESSION['userName'] = $userName;
+
+
+
+            $registerResult = userRegisterQuery($socialId, $this->socialType, $userName, $this->DBCON);
             //회원가입 완료 후 세션 부여.
             $result = idChecheckQuery($socialId, $this->socialType, $this->DBCON);
 

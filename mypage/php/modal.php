@@ -35,7 +35,7 @@ $modalHtml = <<<HTML
         <p class="description">{$spotInfo['코스 주제 설명']}</p>
         <p class="address"><strong>주소:</strong> {$spotInfo['주소']}</p>
         <p class="homepage"><strong>홈페이지:</strong> <a href="{$spotInfo['홈페이지']}" target="_blank">{$spotInfo['홈페이지']}</a></p>
-        <button class="unfavorite-button" data-id="{$spotInfo['관광지번호']}">찜 취소</button>
+
     </div>
 </div>
 HTML;

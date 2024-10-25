@@ -20,6 +20,8 @@
 <body>
     <?php include '../../header/header.php';
     print_r("SESSION_userID: " . $_SESSION['userID']);
+    print_r("<br/   >");
+    print_r("SESSION_userName: " . $_SESSION['userName']);
     ?>
 
     <main>

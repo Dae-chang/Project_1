@@ -218,7 +218,7 @@ async function onCourseClick(course) {
     courseDetailElement.scrollTop = 0;
   } catch (error) {
     console.error(`코스 표시 중 오류가 발생했습니다:`, error.message);
-    alert(`코스 시 중 �����가 발생했습니다. 자세한 내용은 콘솔을 확인해주세요.`);
+    alert(`코스 시 중 가 발생했습니다. 자세한 내용은 콘솔을 확인해주세요.`);
   }
 }
 
@@ -298,9 +298,17 @@ async function onMyBookmarksClick() {
   try {
     // 찜한 관광지 데이터 가져오기
     const bookmarkedAttractions = await fetchBookmarkedAttractions();
-    const bookmarkedPlaces = allCoursesData.filter((place) => bookmarkedAttractions.includes(place.관광지));
 
-    await displayCourseMarkers(null, bookmarkedPlaces);
+    // 중복 제거를 위해 Set 사용
+    const uniqueBookmarkedAttractions = new Set(bookmarkedAttractions);
+
+    // 중복이 제거된 찜한 관광지만 필터링
+    const bookmarkedPlaces = allCoursesData.filter((place) => uniqueBookmarkedAttractions.has(place.관광지));
+
+    // 중복 제거된 결과에서 첫 번째 항목만 선택
+    const uniqueBookmarkedPlaces = Array.from(new Map(bookmarkedPlaces.map((place) => [place.관광지, place])).values());
+
+    await displayCourseMarkers(null, uniqueBookmarkedPlaces);
 
     // 코스 상세 정보 섹션 표시
     const courseDetailElement = document.getElementById("course-detail");
@@ -320,7 +328,7 @@ async function onMyBookmarksClick() {
     });
 
     // 찜한 관광지 상세 정보 표시
-    await displayPlaceDetails(bookmarkedPlaces);
+    await displayPlaceDetails(uniqueBookmarkedPlaces);
 
     // 하트 버튼 상태 업데이트
     await updateHeartButtonStates();
