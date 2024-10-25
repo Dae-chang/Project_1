@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>대구 관광지  소개</title>
+    <title>대구 관광지 소개</title>
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="../css/slide.css">
     <link rel="stylesheet" href="../../header/header.css">
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
+
 </head>
+
 <body>
-<?php include '../../header/header.php'; ?>
+    <?php include '../../header/header.php';
+    session_start();
+    print_r("SESSION_userID: " . $_SESSION['userID']);
+    ?>
 
     <main>
 
-    <?php include 'slide.php'; ?>
+        <?php include 'slide.php'; ?>
 
         <!-- 흰색 바탕 추가 -->
         <div class="white-space"></div>
@@ -53,28 +59,28 @@
                     <p>대구의 <span style="color: #204cab;">창</span></p>
                     <p>추천 장소 <span style="color: #f52121;">영상</span></p>
                 </div>
-                
+
                 <div class="video_small_container">
                     <div class="video small">
                         <iframe width="300" height="300" src="https://www.youtube.com/embed/tFwOQTc80DM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        
+
                     </div>
                     <div class="video small">
                         <iframe width="300" height="300" src="https://www.youtube.com/embed/mWTJxF3d-Kk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        
+
                     </div>
                 </div>
             </div>
             <div class="video-container-2">
                 <div class="video large">
                     <iframe width="500" height="500" src="https://www.youtube.com/embed/neNAp8ggSoc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    
+
                 </div>
             </div>
         </section>
-        
-      
-        
+
+
+
     </main>
 
     <footer>
@@ -85,10 +91,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Slick 슬라이더 스크립트 추가 -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    
+
     <script src="../script/attractionsSlider.js"></script>
     <script src="../script/slideShow.js"></script>
-    
+
 
 </body>
+
 </html>
