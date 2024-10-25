@@ -73,13 +73,9 @@ function renderCourseList() {
 
 // 하트 버튼 토글 함수
 function toggleHeart(courseId) {
-  const coursePlaces = allCoursesData.filter(
-    (place) => place.분류 === courseId
-  );
+  const coursePlaces = allCoursesData.filter((place) => place.분류 === courseId);
   coursePlaces.forEach((place) => {
-    const placeDetail = document.querySelector(
-      `.place-detail[data-id="${place.관광지번호}"]`
-    );
+    const placeDetail = document.querySelector(`.place-detail[data-id="${place.관광지번호}"]`);
     if (placeDetail) {
       const heartButton = placeDetail.querySelector(".heart-button");
       //heartButton.classList.toggle("active"); // 하트 버튼 상태 토글
@@ -139,9 +135,7 @@ function displayPlaceDetails(coursePlaces) {
     heartButton.className = "heart-button";
     heartButton.setAttribute("data-name", place.관광지);
     heartButton.innerHTML = bookmarkedPlaces.has(place.관광지) ? "🤍" : "❤️";
-    /*if (bookmarkedPlaces.has(place.관광지)) {
-      heartButton.classList.add("active");
-    }*/
+
     heartButton.addEventListener("click", (e) => {
       e.stopPropagation(); // 부모 클릭 이벤트 방지
       toggleHeart(place.관광지);
@@ -183,9 +177,7 @@ async function onCourseClick(course) {
     }
 
     await displayCourseMarkers(course.id);
-    console.log(
-      `${course.name} 코스가 선택되었습니다. 지도에 마커를 표시합니다.`
-    );
+    console.log(`${course.name} 코스가 선택되었습니다. 지도에 마커를 표시합니다.`);
 
     // 코스 데이터를 가져옵니다.
     const courseData = await getCourseData(course.id);
@@ -229,9 +221,7 @@ async function onCourseClick(course) {
     courseDetailElement.scrollTop = 0;
   } catch (error) {
     console.error(`코스 표시 중 오류가 발생했습니다:`, error.message);
-    alert(
-      `코스 표시 중 오류가 발생했습니다. 자세한 내용은 콘솔을 확인해주세요.`
-    );
+    alert(`코스 표시 중 오류가 발생했습니다. 자세한 내용은 콘솔을 확인해주세요.`);
   }
 }
 
@@ -277,12 +267,8 @@ function updateHeartButtonStates() {
       //button.classList.toggle("active", bookmarkedPlaces.has(placeName));
       button.innerHTML = bookmarkedPlaces.has(placeName) ? "🤍" : "❤️";
     } else if (courseId) {
-      const coursePlaces = allCoursesData.filter(
-        (place) => place.분류 === courseId
-      );
-      const allPlacesBookmarked = coursePlaces.every((place) =>
-        bookmarkedPlaces.has(place.관광지)
-      );
+      const coursePlaces = allCoursesData.filter((place) => place.분류 === courseId);
+      const allPlacesBookmarked = coursePlaces.every((place) => bookmarkedPlaces.has(place.관광지));
       //button.classList.toggle("active", allPlacesBookmarked);
     }
   });
