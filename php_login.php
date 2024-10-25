@@ -110,6 +110,10 @@ class SocialLoginController
         if ($row) {
             $_SESSION['userID'] = $row['Key'];
 
+
+
+            $_SESSION['userName'] = $row['name'];
+
             echo "<script>";
             echo "window.location.href='./index/php/';";
             echo "</script>";
@@ -121,8 +125,8 @@ class SocialLoginController
                 : ($this->socialType == "KAKAO"
                     ? $profile['properties']['nickname']
                     : $profile['name']);
+            $_SESSION['userName'] = $userName;
 
-            print_r($userName);
 
 
             $registerResult = userRegisterQuery($socialId, $this->socialType, $userName, $this->DBCON);
