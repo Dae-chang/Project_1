@@ -9,12 +9,18 @@ let currentOverlay = null;
 
 // 지도 초기화
 function initMap() {
+  if (window.mapInitialized) {
+    console.log("지도가 이미 초기화되었습니다.");
+    return;
+  }
+
   const mapContainer = document.getElementById("map");
   const mapOption = {
     center: new kakao.maps.LatLng(DAEGU_CENTER.lat, DAEGU_CENTER.lng),
     level: MAP_LEVEL,
   };
   map = new kakao.maps.Map(mapContainer, mapOption);
+  window.mapInitialized = true;
 }
 
 // 주소를 위도, 경도로 변환하는 함수

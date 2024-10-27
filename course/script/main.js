@@ -1,6 +1,5 @@
 // 초기화 함수
 function init() {
-  initMap();
   renderCourseList();
 
   // 전체 문서에 대한 클릭 이벤트 리스너 추가 (이벤트 위임)

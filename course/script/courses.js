@@ -140,10 +140,14 @@ async function onCourseClick(course) {
     }
 
     await displayCourseMarkers(course.id);
-    console.log(`${course.name} 코스가 선택되었습니다. 지도에 마커를 표시합니다.`);
+    console.log(
+      `${course.name} 코스가 선택되었습니다. 지도에 마커를 표시합니다.`
+    );
 
     // 코스 데이터를 가져옵니다.
-    const courseData = allCoursesData.filter((place) => place.분류 === course.id);
+    const courseData = allCoursesData.filter(
+      (place) => place.분류 === course.id
+    );
 
     // 코스 상세 정보 섹션을 표시합니다.
     const courseDetailElement = document.getElementById("course-detail");
@@ -287,7 +291,9 @@ async function displayAllAttractions() {
     courseDetailElement.scrollTop = 0;
   } catch (error) {
     console.error("관광지 표시 중 오류 발생:", error);
-    alert("관광지 표시 중 오류가 발생했습니다. 자세한 내용은 콘솔을 확인해주세요.");
+    alert(
+      "관광지 표시 중 오류가 발생했습니다. 자세한 내용은 콘솔을 확인해주세요."
+    );
   }
 }
 
