@@ -240,5 +240,5 @@ document.addEventListener("DOMContentLoaded", () => {
     initMap(); // 지도 초기화 함수 호출 (map.js에 정의되어 있어야 함)
     window.mapInitialized = true;
   }
-  initMap(); // 지도 초기화 함수 호출 (map.js에 정의되어 있어야 함)
+  // 중복된 initMap() 호출 제거
 });

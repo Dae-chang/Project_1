@@ -1,6 +1,6 @@
 // 초기화 함수
 function init() {
-  renderCourseList();
+  // renderCourseList() 호출 제거
 
   // 전체 문서에 대한 클릭 이벤트 리스너 추가 (이벤트 위임)
   document.addEventListener("click", function (event) {
