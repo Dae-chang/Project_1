@@ -5,7 +5,7 @@ session_start();
 function getUserCourses($user_key, $DBCON)
 {
     mysqli_set_charset($DBCON, 'utf8');
-    $user_key = mysqli_real_escape_string($DBCON, $user_key);
+    $user_key = mysqli_real_escape_string($DBCON, $user_key); 
     $query = "SELECT * FROM course WHERE user = '{$user_key}'";
     $result = mysqli_query($DBCON, $query);
     if (!$result) {
