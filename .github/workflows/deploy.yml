@@ -1,0 +1,27 @@
+# 워크플로우 이름
+name: ftp-deploy
+# 이벤트 생성하기
+on:
+  # 이벤트를 수동으로 실행
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+# 워크플로우가 수행할 작업
+jobs:
+  # 작업의 이름
+  upload:
+    # 작업을 실행할 환경 (리눅스 우분투)
+    runs-on: ubuntu-latest
+    # 실행 단계
+    steps:
+      - name: checkout respository
+        # 깃허브에서 실행한 환경으로 코드 내려받기
+        uses: actions/checkout@v3
+
+      - name: install lftp
+        # ftp 업로드에 필요한 프로그램 설치
+        run: sudo apt-get install -y lftp
+      - name: Upload files via FTP
+        run: lftp -u ${{ secrets.SFTP_USER }},${{ secrets.SFTP_PASSWORD }} -e "set ftp:ssl-allow no; mirror -R ./ /html/project; bye" ftp://${{ secrets.SFTP_HOST }}:${{ secrets.SFTP_PORT }}
