@@ -144,12 +144,53 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+}
+
+.place-name-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .place-name {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 5px;
+  margin: 0;
+  flex: 1;
+}
+
+.heart-button {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #ff0000;
+  padding: 0;
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+}
+
+.heart-button:hover {
+  transform: scale(1.1);
+}
+
+/* 모바일 & 태블릿 버전 스타일 */
+@media (max-width: 768px) {
+  .place-name-container {
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .heart-button {
+    font-size: 24px;
+  }
+}
+
+/* 더 작은 모바일 화면 */
+@media (max-width: 436px) {
+  .heart-button {
+    font-size: 20px;
+  }
 }
 
 .place-description {
@@ -394,10 +435,18 @@ h3,
     text-align: center;
     background: none;
     border: none;
+<<<<<<< HEAD
     font-size: 28px; /* 버튼 크기 증가 */
     cursor: pointer;
     margin-top: 5px; /* 버튼 위쪽 여백 유지 */
     transition: color 0.3s ease; /* 색상 변화 애니메이션 */
+=======
+    font-size: 28px;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: all 0.3s ease;
+    color: #ff0000; /* 빨간색 */
+>>>>>>> course
   }
 
   #place-details .heart-button.active {
@@ -496,7 +545,11 @@ h3,
   }
 
   .overlay-description {
+<<<<<<< HEAD
     font-size: 20px; /* 폰트 크기 증가 */
+=======
+    font-size: 20px; /* 트 크기 증가 */
+>>>>>>> course
     margin: 5px 0; /* 간격 증가 */
     overflow: hidden;
     display: -webkit-box;
