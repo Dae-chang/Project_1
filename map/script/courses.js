@@ -39,6 +39,17 @@ function renderCourseList() {
   const courseListElement = document.getElementById("course-list");
   courseListElement.innerHTML = ""; // 기존 내용 초기화
 
+  // 나만의 코스 버튼 추가
+  const myCustomCourseElement = document.createElement("div");
+  myCustomCourseElement.innerHTML = `
+      <button class="my-course">나만의 코스</button>
+    `;
+  myCustomCourseElement.addEventListener("click", () => {
+    window.location.href = "../../course/php/map.php";
+  });
+  courseListElement.appendChild(myCustomCourseElement);
+
+  // 기존 코스 목록 렌더링
   courses.forEach((course) => {
     const courseElement = document.createElement("div");
     courseElement.className = "course-item";
@@ -129,29 +140,35 @@ async function displayPlaceDetails(coursePlaces) {
     const placeInfo = document.createElement("div");
     placeInfo.className = "place-info";
 
+    // place-name-container 생성 (이름과 하트 버튼을 감싸는 컨테이너)
+    const placeNameContainer = document.createElement("div");
+    placeNameContainer.className = "place-name-container";
+
     const placeName = document.createElement("h3");
     placeName.className = "place-name";
     placeName.textContent = place.관광지;
+
+    const heartButton = document.createElement("button");
+    heartButton.className = "heart-button";
+    heartButton.setAttribute("data-name", place.관광지);
+    const isBookmarked = bookmarkedPlaces.has(place.관광지);
+    heartButton.innerHTML = isBookmarked ? '<i class="fa-solid fa-heart"></i>' : '<i class="fa-regular fa-heart"></i>';
+
+    heartButton.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleHeart(place.관광지);
+    });
 
     const placeDescription = document.createElement("p");
     placeDescription.className = "place-description";
     placeDescription.textContent = place.코스설명;
 
-    // 하트 버튼 추가
-    const heartButton = document.createElement("button");
-    heartButton.className = "heart-button";
-    heartButton.setAttribute("data-name", place.관광지);
-    const isBookmarked = bookmarkedPlaces.has(place.관광지);
-    heartButton.innerHTML = isBookmarked ? "🤍" : "❤️";
+    // 요소들을 순서대로 추가
+    placeNameContainer.appendChild(placeName);
+    placeNameContainer.appendChild(heartButton);
 
-    heartButton.addEventListener("click", (e) => {
-      e.stopPropagation(); // 부모 클릭 이벤트 방지
-      toggleHeart(place.관광지);
-    });
-
-    placeInfo.appendChild(placeName);
+    placeInfo.appendChild(placeNameContainer);
     placeInfo.appendChild(placeDescription);
-    placeInfo.appendChild(heartButton); // 하트 버튼을 정보에 추가
 
     placeDetail.appendChild(placeImage);
     placeDetail.appendChild(placeInfo);
@@ -217,8 +234,8 @@ async function onCourseClick(course) {
     // 스크롤바를 최상단으로 이동
     courseDetailElement.scrollTop = 0;
   } catch (error) {
-    console.error(`코스 표시 중 오류가 발생했습니다:`, error.message);
-    alert(`코스 시 중 가 발생했습니다. 자세한 내용은 콘솔을 확인해주세요.`);
+    console.error(`코스 표시 중 오류가 발생했습:`, error.message);
+    alert(`코스 시 중 가 발생했습니다. 자세한 내용은 콘을 확인해주세요.`);
   }
 }
 
@@ -256,7 +273,8 @@ async function updateHeartButtonStates() {
   heartButtons.forEach((button) => {
     const placeName = button.getAttribute("data-name");
     if (placeName) {
-      button.innerHTML = bookmarkedPlaces.has(placeName) ? "🤍" : "❤️";
+      // 문자열로 Font Awesome 아이콘 HTML 처리
+      button.innerHTML = bookmarkedPlaces.has(placeName) ? '<i class="fa-solid fa-heart"></i>' : '<i class="fa-regular fa-heart"></i>';
     }
   });
 }
@@ -321,7 +339,7 @@ async function onMyBookmarksClick() {
         <button id="close-course-detail" style="float: right; background: none; border: none; font-size: 1.5em; cursor: pointer;">&times;</button>
       `;
 
-    // 닫기 버튼 이벤트 리스너 추가
+    // 닫기 버튼 이벤트 리스너 가
     const closeButton = document.getElementById("close-course-detail");
     closeButton.addEventListener("click", () => {
       courseDetailElement.style.display = "none";

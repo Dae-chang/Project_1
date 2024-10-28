@@ -1,0 +1,65 @@
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 1200px;
+  height: 600px;
+  background-color: white;
+  border-radius: 40px;
+  display: flex;
+  overflow: hidden;
+}
+
+.modal-image {
+  width: 600px;
+  height: 600px;
+}
+
+.modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-info {
+  width: 600px;
+  height: 600px;
+  padding: 20px;
+  position: relative;
+}
+
+.modal-info h2 {
+  font-size: 50px;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.description {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.address,
+.homepage {
+  margin-bottom: 10px;
+}
