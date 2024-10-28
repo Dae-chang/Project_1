@@ -39,6 +39,17 @@ function renderCourseList() {
   const courseListElement = document.getElementById("course-list");
   courseListElement.innerHTML = ""; // 기존 내용 초기화
 
+  // 나만의 코스 버튼 추가
+  const myCustomCourseElement = document.createElement("div");
+  myCustomCourseElement.innerHTML = `
+      <button class="my-course">나만의 코스</button>
+    `;
+  myCustomCourseElement.addEventListener("click", () => {
+    window.location.href = "../../course/php/map.php";
+  });
+  courseListElement.appendChild(myCustomCourseElement);
+
+  // 기존 코스 목록 렌더링
   courses.forEach((course) => {
     const courseElement = document.createElement("div");
     courseElement.className = "course-item";

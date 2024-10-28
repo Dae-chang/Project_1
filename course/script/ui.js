@@ -7,7 +7,7 @@ function createCustomOverlayContent(place) {
           <img src="../img/detail_img_${place.관광지번호}.jpg" alt="${place.관광지}" class="overlay-image">
           <div class="overlay-info">
             <h3 class="overlay-title">${place.관광지}</h3>
-            <p class="overlay-description">${place.코스설명}</p>
+            
             <p class="overlay-address">${place.주소}</p>
             <button class="overlay-button" data-id="${place.관광지번호}" style="z-index: 11;">자세히 보기</button>
           </div>

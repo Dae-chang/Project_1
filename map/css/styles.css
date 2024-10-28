@@ -33,10 +33,10 @@ main {
 }
 
 #course-detail {
-  padding: 15px;
-  border: 1px solid #ddd;
+  padding-right: 15px;
+
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
   margin: 0 15px;
   background-color: white;
   display: none;
@@ -55,7 +55,7 @@ main {
   justify-content: center;
   align-items: center;
   font-size: 15px;
-  position: sticky; /* 스티키 포지션 추가 */
+  position: sticky; /* 스티키 포지션 추 */
   top: -10px; /* 상단에 고정 */
   z-index: 1; /* 다른 요소 위에 표시 */
   padding: 10px 0; /* 상하 패딩 추 */
@@ -63,11 +63,7 @@ main {
 }
 
 .course-item {
-  border: 1px solid black;
-  border-bottom: none;
-  border-left: none;
-  border-right: none;
-  padding: 15px;
+  padding: 25px 15px 20px 15px;
   margin: 0 auto; /* 좌우 마진을 auto로 설정하여 중앙 정렬 */
   text-align: center;
   font-family: "Arial", sans-serif;
@@ -79,13 +75,13 @@ main {
 
 .course-item h3 {
   font-size: 18px;
-  margin: 0 0 10px 0;
+  margin: 0 0 20px 0;
   font-weight: bold;
 }
 
 .course-item img {
   width: 100%; /* 이미지 너비 조정 */
-  height: auto;
+  height: 160px;
   border-radius: 15px;
   max-width: 100%; /* 최대 너비 제한 */
 }
@@ -93,11 +89,11 @@ main {
 .course-item p {
   font-size: 14px;
   color: #666;
-  margin: 10px 0;
+  margin: 5px 0;
 }
 
 .course-item .tags {
-  margin-top: 10px;
+  margin-top: 5px;
   font-size: 12px;
   color: #666;
 }
@@ -111,7 +107,32 @@ main {
 }
 
 .course-item:hover {
-  background-color: #effcff; /* 호버 시 배경색 변경 */
+  background-color: #e2f5ff; /* 호버 시 배경색 변 */
+}
+
+.my-course {
+  display: flex; /* 추가 */
+  justify-content: center; /* 추가 */
+  align-items: center; /* 기존 */
+  width: 170px;
+  height: 40px;
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  background-color: #077fff;
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  margin: 0 auto; /* 추가: 버튼 자체를 컨테이너 내에서 가운데 정렬 */
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.my-course:hover {
+  transform: scale(1.02);
+  background-color: #0060c7; /* 더 진한 파란색으로 변경 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 추가 */
+  transition: all 0.3s ease; /* 부드러운 전환 효과 */
 }
 
 .place-details {
@@ -120,27 +141,29 @@ main {
 
 .place-detail {
   width: 100%;
-
+  cursor: pointer;
   height: 200px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  transition: background-color 0.5s ease; /* 부드러운 배경색 전환 효과 */
+  border-bottom: 3px solid #eee;
   overflow: hidden;
   display: flex;
   align-items: center;
 }
 
+.place-detail:hover {
+  background-color: #e2f5ff;
+}
 .place-image {
   width: 140px;
   height: 140px;
   object-fit: cover;
   border-radius: 10px;
-  margin: 0 10px 0 30px;
+  margin: 0 10px 0 10px;
 }
 
 .place-info {
   flex: 1;
-  padding: 10px;
+  padding: 0 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -162,7 +185,7 @@ main {
 .heart-button {
   background: none;
   border: none;
-  font-size: 28px;
+  font-size: 20px;
   cursor: pointer;
   color: #ff0000;
   padding: 0;
@@ -253,62 +276,61 @@ h3,
 
 .custom-overlay {
   position: relative;
-  width: 350px;
-  height: 400px;
+  width: 300px;
+  height: 360px;
   background: white;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden; /* 추가: 내용이 넘치지 않도록 설정 */
 }
 
 .overlay-content {
-  padding: 15px;
+  padding: 0;
+  height: 100%;
+  display: flex; /* 추가: flex 컨테이너로 설정 */
+  flex-direction: column; /* 추가: 세로 방향 정렬 */
 }
 
 .overlay-image {
-  width: 320px;
-  height: 240px;
+  width: 100%;
+  height: 240px; /* 수정: 높이 조정 */
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: 5px 5px 0 0;
 }
 
 .overlay-info {
+  flex: 1; /* 추가: 남은 공간 차지 */
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  justify-content: space-between; /* 추가: 내용 간격 조절 */
 }
 
 .overlay-title {
-  font-size: 24px;
+  font-size: 20px; /* 수정: 글자 크기 조정 */
   font-weight: bold;
-  margin: 5px 0;
-}
-
-.overlay-description {
-  font-size: 12px;
-  margin: 5px 0;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
+  margin: 10px 0 5px 10px; /* 수정: 마진 조정 */
+  padding-left: 8px;
 }
 
 .overlay-address {
-  font-size: 8px;
+  font-size: 14px; /* 수정: 글자 크기 조정 */
   color: #666;
-  margin: 5px 0;
+  margin: 0 0 10px 10px; /* 수정: 마진 조정 */
+  padding-left: 8px;
 }
 
 .overlay-button {
-  align-self: flex-end;
-  background-color: #077fff;
-  color: white;
+  width: 100%;
+  align-self: stretch; /* 버튼을 컨테이너 너비에 맞춤 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  color: #888; /* 글자색 변경 */
   border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
+  border-top: 1px solid #ddd; /* 상단 테두리 추가 */
+  padding: 10px 0; /* 상하 패딩만 적용 */
   cursor: pointer;
   font-size: 12px;
-  margin-top: 5px;
+  margin-top: auto; /* 하단 정렬을 위해 자동 마진 적용 */
+  background: none; /* 배경색 제거 */
 }
 
 .overlay-arrow {
@@ -435,18 +457,11 @@ h3,
     text-align: center;
     background: none;
     border: none;
-<<<<<<< HEAD
-    font-size: 28px; /* 버튼 크기 증가 */
-    cursor: pointer;
-    margin-top: 5px; /* 버튼 위쪽 여백 유지 */
-    transition: color 0.3s ease; /* 색상 변화 애니메이션 */
-=======
     font-size: 28px;
     cursor: pointer;
     margin-top: 5px;
     transition: all 0.3s ease;
     color: #ff0000; /* 빨간색 */
->>>>>>> course
   }
 
   #place-details .heart-button.active {
@@ -521,15 +536,10 @@ h3,
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   }
 
-  .overlay-content {
-    padding: 15px; /* 패딩 증가 */
-  }
-
   .overlay-image {
     width: 100%; /* 너비를 100%로 설정 */
-    height: 180px; /* 높이 증가 */
+    height: 240px; /* 높이 증가 */
     object-fit: cover;
-    border-radius: 5px;
   }
 
   .overlay-info {
@@ -539,17 +549,11 @@ h3,
   }
 
   .overlay-title {
-    font-size: 30px; /* 폰트 크기 증가 */
     font-weight: bold;
-    margin: 5px 0; /* 간격 증가 */
   }
 
   .overlay-description {
-<<<<<<< HEAD
-    font-size: 20px; /* 폰트 크기 증가 */
-=======
     font-size: 20px; /* 트 크기 증가 */
->>>>>>> course
     margin: 5px 0; /* 간격 증가 */
     overflow: hidden;
     display: -webkit-box;
@@ -566,7 +570,6 @@ h3,
 
   .overlay-button {
     align-self: flex-end;
-    background-color: #077fff;
     color: white;
     border: none;
     padding: 6px 12px; /* 버튼 패딩 증가 */

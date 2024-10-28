@@ -6,16 +6,14 @@
     <title>마이페이지 - 찜한 관광지 및 후기</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../../header/header.css">
-    <link rel="stylesheet" href="../css/modal.css">
+    <link rel="stylesheet" href="../../modal/modal.css">
 </head>
 <body>
 <?php include '../../header/header.php'; ?>
 
     <main>
         <section id="favorites">
-            <div class="title">
             <p>내가 찜한 여행지 목록</p>
-            </div>
             <div class="favorites-grid">
                 <?php
                 require_once '../../env.php';
@@ -68,11 +66,11 @@
         </section>
 
     </main>
-    <div class="footerPadding">
+
     <footer>
         <p>&copy; 2023 대구 관광지 소개. 모든 권리 보유.</p>
     </footer>
-    </div>
+
     <script>
         function changePage(page) {
             window.location.href = `?page=${page}`;
@@ -81,7 +79,7 @@
         document.querySelectorAll('.favorite-item').forEach(item => {
             item.addEventListener('click', function() {
                 const spotName = this.getAttribute('data-name');
-                fetch(`modal.php?name=${encodeURIComponent(spotName)}`)
+                fetch(`../../modal/modal.php?name=${encodeURIComponent(spotName)}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.error) {
