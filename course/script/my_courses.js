@@ -52,9 +52,7 @@ async function displayAllAttractions() {
     courseDetailElement.scrollTop = 0;
   } catch (error) {
     console.error("관광지 표시 중 오류 발생:", error);
-    alert(
-      "관광지 표시 중 오류가 발생했습니다. 자세한 내용은 콘솔을 확인해주세요."
-    );
+    alert("관광지 표시 중 오류가 발생했습니다. 자세한 내용은 콘솔을 확인해주세요.");
   }
 }
 
@@ -105,9 +103,7 @@ function createAttractionElement(place) {
   attractionElement.appendChild(imageContainer);
   attractionElement.appendChild(nameContainer);
 
-  attractionElement.addEventListener("click", () =>
-    toggleAttractionSelection(attractionElement, place)
-  );
+  attractionElement.addEventListener("click", () => toggleAttractionSelection(attractionElement, place));
 
   return attractionElement;
 }
@@ -216,14 +212,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 지도 이벤트 리스너 추가
     kakao.maps.event.addListener(map, "dragend", () => {
-      updateMarkers().catch((error) =>
-        console.error("마커 업데이트 중 오류 발생:", error)
-      );
+      updateMarkers().catch((error) => console.error("마커 업데이트 중 오류 발생:", error));
     });
     kakao.maps.event.addListener(map, "zoom_changed", () => {
-      updateMarkers().catch((error) =>
-        console.error("마커 업데이트 중 오류 발생:", error)
-      );
+      updateMarkers().catch((error) => console.error("마커 업데이트 중 오류 발생:", error));
     });
   }
 });
