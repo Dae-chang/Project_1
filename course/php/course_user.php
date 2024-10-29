@@ -5,7 +5,6 @@ require_once '../../env.php';
 
 try {
     $userKey = $_SESSION['userID'];
-    
     // 사용자의 코스 목록 조회
     $query = "
         SELECT 
@@ -22,7 +21,7 @@ try {
     
     $stmt = mysqli_prepare($DBCON, $query);
     mysqli_stmt_bind_param($stmt, "s", $userKey);
-    
+
     if (!mysqli_stmt_execute($stmt)) {
         throw new Exception("코스 목록 조회 실패: " . mysqli_error($DBCON));
     }
