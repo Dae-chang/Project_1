@@ -230,7 +230,7 @@ h3,
 #course-list,
 #course-detail {
   scrollbar-width: thin;
-  scrollbar-color: #077fff #737373;
+  scrollbar-color: #737373 #ffffff;
 }
 
 #course-list::-webkit-scrollbar,
@@ -298,7 +298,6 @@ h3,
   flex: 1; /* 추가: 남은 공간 차지 */
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* 추가: 내용 간격 조절 */
 }
 
 .overlay-title {
@@ -534,8 +533,8 @@ h3,
   }
   .custom-overlay {
     position: relative;
-    width: 320px; /* 너비 증가 */
-    height: 380px; /* 높이 증가 */
+    width: 260px; /* 너비 증가 */
+    height: 300px; /* 높이 증가 */
     background: white;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
@@ -543,7 +542,7 @@ h3,
 
   .overlay-image {
     width: 100%; /* 너비를 100%로 설정 */
-    height: 240px; /* 높이 증가 */
+    height: 180px; /* 높이 증가 */
     object-fit: cover;
   }
 
@@ -571,13 +570,14 @@ h3,
   .overlay-address {
     font-size: 12px; /* 폰트 크기 증가 */
     color: #666;
-    margin: 5px 0; /* 간격 증가 */
   }
 
   .overlay-button {
     align-self: flex-end;
-    color: white;
+    color: #888;
+
     border: none;
+    border-top: 1px solid #ddd; /* 상단 테두리 추가 */
     padding: 6px 12px; /* 버튼 패딩 증가 */
     border-radius: 5px;
     cursor: pointer;
@@ -817,22 +817,17 @@ h3,
   }
   .custom-overlay {
     position: relative;
-    width: 300px; /* 너비 줄임 */
-    height: 300px; /* 높이 줄임 */
+    width: 200px; /* 너비 줄임 */
+    height: 200px; /* 높이 줄임 */
     background: white;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   }
 
-  .overlay-content {
-    padding: 10px; /* 패딩 줄임 */
-  }
-
   .overlay-image {
     width: 100%; /* 너비를 100%로 설정 */
-    height: 150px; /* 높이 줄임 */
+    height: 120px; /* 높이 줄임 */
     object-fit: cover;
-    border-radius: 5px;
   }
 
   .overlay-info {
@@ -844,7 +839,7 @@ h3,
   .overlay-title {
     font-size: 18px; /* 폰트 크기 줄임 */
     font-weight: bold;
-    margin: 3px 0; /* 간격 줄임 */
+    margin: 3px 5px; /* 간격 줄임 */
   }
 
   .overlay-description {
@@ -858,21 +853,22 @@ h3,
   }
 
   .overlay-address {
-    font-size: 6px; /* 폰트 크기 줄임 */
+    font-size: 7px; /* 폰트 크기 줄임 */
     color: #666;
-    margin: 3px 0; /* 간격 줄임 */
+    margin: 3px 5px; /* 간격 줄임 */
   }
 
   .overlay-button {
     align-self: flex-end;
-    background-color: #077fff;
-    color: white;
+    color: #888;
     border: none;
+    border-top: 1px solid #ddd; /* 상단 테두리 추가 */
+
     padding: 4px 8px; /* 버튼 패딩 줄임 */
     border-radius: 5px;
     cursor: pointer;
-    font-size: 10px; /* 버튼 폰트 크기 줄임 */
-    margin-top: 5px;
+    font-size: 12px; /* 버튼 폰트 크기 줄임 */
+    margin-top: auto;
   }
 
   .overlay-arrow {

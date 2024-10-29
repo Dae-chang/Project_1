@@ -12,8 +12,10 @@
 }
 
 .modal-content {
-  width: 1200px;
-  height: 600px;
+  width: 80%;
+  max-width: 1200px;
+  height: 60vh;
+  max-height: 95vh;
   background-color: white;
   border-radius: 40px;
   display: flex;
@@ -21,8 +23,9 @@
 }
 
 .modal-image {
-  width: 600px;
-  height: 600px;
+  width: 50%;
+  height: auto;
+  object-fit: cover;
 }
 
 .modal-image img {
@@ -32,8 +35,8 @@
 }
 
 .modal-info {
-  width: 600px;
-  height: 600px;
+  width: 50%;
+
   padding: 20px;
   position: relative;
   display: flex;
@@ -42,14 +45,14 @@
 
 .bottom-info {
   position: absolute;
-  bottom: 60px;
+  bottom: 30px;
   left: 20px;
   right: 20px;
   background-color: white;
 }
 
 .modal-info h2 {
-  font-size: 50px;
+  font-size: 2vw;
   font-weight: bold;
   margin: 10px 0 0 30px;
 }
@@ -57,6 +60,7 @@
 .modal-info p {
   margin: 10px 40px 0 30px;
   font-weight: 300;
+  font-size: 1vw;
 }
 
 .close-button {
@@ -70,14 +74,76 @@
 }
 
 .description {
-  font-size: 20px;
+  font-size: 0.8vw;
   margin-bottom: 20px;
   overflow-y: auto;
-  max-height: calc(100% - 150px); /* 상단 제목과 하단 정보 공간 확보 */
+  max-height: calc(100% - 200px);
+  min-height: 150px;
 }
 
 .address,
 .homepage {
   margin-bottom: 10px;
   margin-top: auto;
+}
+
+/* 768px 중단점 */
+@media (max-width: 768px) {
+  .modal-content {
+    flex-direction: column;
+    height: 60vh;
+  }
+
+  .modal-image {
+    width: 100%;
+    height: 60%;
+  }
+
+  .modal-info {
+    width: 100%;
+    height: 40%;
+  }
+
+  .modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .modal-info .description {
+    font-size: 1.5vw;
+    max-height: calc(100% - 150px);
+    min-height: 100px;
+  }
+
+  .modal-info .address,
+  .modal-info .homepage {
+    font-size: 1.5vw;
+  }
+}
+
+/* 436px 중단점 */
+@media (max-width: 436px) {
+  .modal-image {
+    height: 65%;
+  }
+
+  .modal-info {
+    height: 35%;
+    padding: 5px;
+  }
+
+  .description {
+    font-size: 1.8vw;
+    max-height: calc(100% - 120px);
+    min-height: 80px;
+  }
+
+  .bottom-info {
+    bottom: 20px;
+  }
+
+  .close-button {
+    top: 0;
+  }
 }

@@ -27,7 +27,7 @@ session_start(); // 세션 시작
 
     <div class="side-menu">
         <?php if(isset($_SESSION['userID'])): ?>
-            <a href="../../ㅉlogout.php">로그아웃</a>
+            <a href="../../logout.php">로그아웃</a>
         <?php else: ?>
             <a href="../../login/php/login.php">로그인</a>
         <?php endif; ?>

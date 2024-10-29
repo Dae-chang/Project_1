@@ -6,7 +6,7 @@
     <title>대구 관광지 지도</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../../header/header.css">
-    <link rel="stylesheet" href="../css/modal.css"> <!-- 모달 CSS 추가 -->
+    <link rel="stylesheet" href="../../modal/modal.css"> <!-- 모달 CSS 추가 -->
 
    
     <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=dc62460607d7fe5bed6dabe6348dd72a&libraries=services"></script>
