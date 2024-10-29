@@ -5,7 +5,7 @@ require_once '../../env.php';
 
 try {
     $userKey = $_SESSION['userID'];
-    
+
     // 사용자의 코스 목록 조회
     $query = "
         SELECT 
@@ -19,10 +19,10 @@ try {
         GROUP BY c.Key
         ORDER BY c.created_at DESC
     ";
-    
+
     $stmt = mysqli_prepare($DBCON, $query);
     mysqli_stmt_bind_param($stmt, "s", $userKey);
-    
+
     if (!mysqli_stmt_execute($stmt)) {
         throw new Exception("코스 목록 조회 실패: " . mysqli_error($DBCON));
     }
@@ -36,7 +36,6 @@ try {
     }
 
     echo json_encode(['success' => true, 'courses' => $courses]);
-
 } catch (Exception $e) {
     error_log("Error in course listing: " . $e->getMessage());
     http_response_code(500);
