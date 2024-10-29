@@ -1,0 +1,127 @@
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 1200px;
+  height: 600px;
+  background-color: white;
+  border-radius: 40px;
+  display: flex;
+  overflow: hidden;
+}
+
+.modal-image {
+  width: 600px;
+  height: 600px;
+}
+
+.modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-info {
+  width: 600px;
+  height: 600px;
+  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.bottom-info {
+  position: absolute;
+  bottom: 60px;
+  left: 20px;
+  right: 20px;
+  background-color: white;
+}
+
+.modal-info h2 {
+  font-size: 50px;
+  font-weight: bold;
+  margin: 10px 0 0 30px;
+}
+
+.modal-info p {
+  margin: 10px 40px 0 30px;
+  font-weight: 300;
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.description {
+  font-size: 20px;
+  margin-bottom: 20px;
+  overflow-y: auto;
+  max-height: calc(100% - 150px); /* 상단 제목과 하단 정보 공간 확보 */
+}
+
+.address,
+.homepage {
+  margin-bottom: 10px;
+  margin-top: auto;
+}
+/* 모바일 모드에서만 적용되는 미디어 쿼리 */
+@media (max-width: 436px) {
+  .modal-container {
+    height: 100vh; /* 전체 화면 높이를 기준으로 설정 */
+    justify-content: flex-start; /* 모달을 위쪽으로 정렬 */
+    padding-top: 20px; /* 위쪽에 패딩 추가 */
+  }
+
+  .modal-content {
+    flex-direction: column; /* 모바일에서 세로 방향으로 배치 */
+    max-height: 70vh; /* 최대 높이를 70%로 설정 */
+    overflow: hidden; /* 넘치는 부분 숨김 */
+    border-radius: 12px; /* 모서리 반경 줄임 */
+  }
+
+  .modal-image {
+    width: 100%; /* 전체 폭 사용 */
+    height: 150px; /* 모바일에 맞는 높이 설정 */
+  }
+
+  .modal-info {
+    width: 100%; /* 전체 폭 사용 */
+    padding: 10px; /* 패딩 조정 */
+    overflow-y: auto; /* 세로 방향 스크롤 활성화 */
+    max-height: calc(70vh - 150px - 20px); /* 이미지와 패딩을 뺀 최대 높이 */
+    box-sizing: border-box; /* 패딩 포함 높이 계산 */
+  }
+
+  .modal-info h2 {
+    font-size: 24px; /* 제목 크기 조정 */
+  }
+
+  .modal-info p {
+    font-size: 14px; /* 설명 텍스트 크기 조정 */
+  }
+
+  .close-button {
+    font-size: 20px; /* 버튼 크기 조정 */
+  }
+
+  .description {
+    font-size: 14px; /* 설명 크기 조정 */
+  }
+}

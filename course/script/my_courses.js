@@ -15,7 +15,7 @@ function renderCreateCourseButton() {
   createCourseButton.className = "course-item";
   createCourseButton.innerHTML = `
     <h3>관광지 추가하기</h3>
-    <img src="../img/map_img_plus.jpg" alt="모든 관광지" style="width: 200px; height: 200px;">
+    <img src="../img/map_img_plus.jpg" alt="모든 관광지" class="create-course-image">
   `;
   createCourseButton.addEventListener("click", displayAllAttractions);
   courseListElement.appendChild(createCourseButton);
@@ -38,8 +38,8 @@ async function displayAllAttractions() {
 
     const detailTitleElement = document.getElementById("detail-title");
     detailTitleElement.innerHTML = `
-      모든 관광지 <span style="color: #077fff;">목록</span>
-      <button id="close-course-detail" style="float: right; background: none; border: none; font-size: 1.5em; cursor: pointer;">&times;</button>
+      모든 관광지 <span class="detail-title-highlight">목록</span>
+      <button id="close-course-detail">&times;</button>
     `;
 
     const closeButton = document.getElementById("close-course-detail");
@@ -118,6 +118,12 @@ async function toggleAttractionSelection(element, place) {
     removeCheckmark(element);
     removeMarkerFromMap(place.관광지번호);
   } else {
+    // 최대 7개 제한 확인
+    if (selectedAttractions.size >= 7) {
+      alert("한 코스에는 최대 7개의 관광지만 저장 가능합니다.");
+      return;
+    }
+
     selectedAttractions.add(place.관광지번호);
     element.classList.add("attraction-selected");
     addCheckmark(element);

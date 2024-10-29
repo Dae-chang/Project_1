@@ -33,10 +33,10 @@ main {
 }
 
 #course-detail {
-  padding: 15px;
-  border: 1px solid #ddd;
+  padding-right: 15px;
+
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
   margin: 0 15px;
   background-color: white;
   display: none;
@@ -55,7 +55,7 @@ main {
   justify-content: center;
   align-items: center;
   font-size: 15px;
-  position: sticky; /* 스티키 포지션 추가 */
+  position: sticky; /* 스티키 포지션 추 */
   top: -10px; /* 상단에 고정 */
   z-index: 1; /* 다른 요소 위에 표시 */
   padding: 10px 0; /* 상하 패딩 추 */
@@ -63,11 +63,7 @@ main {
 }
 
 .course-item {
-  border: 1px solid black;
-  border-bottom: none;
-  border-left: none;
-  border-right: none;
-  padding: 15px;
+  padding: 25px 15px 20px 15px;
   margin: 0 auto; /* 좌우 마진을 auto로 설정하여 중앙 정렬 */
   text-align: center;
   font-family: "Arial", sans-serif;
@@ -79,13 +75,13 @@ main {
 
 .course-item h3 {
   font-size: 18px;
-  margin: 0 0 10px 0;
+  margin: 0 0 20px 0;
   font-weight: bold;
 }
 
 .course-item img {
   width: 100%; /* 이미지 너비 조정 */
-  height: auto;
+  height: 160px;
   border-radius: 15px;
   max-width: 100%; /* 최대 너비 제한 */
 }
@@ -93,11 +89,11 @@ main {
 .course-item p {
   font-size: 14px;
   color: #666;
-  margin: 10px 0;
+  margin: 5px 0;
 }
 
 .course-item .tags {
-  margin-top: 10px;
+  margin-top: 5px;
   font-size: 12px;
   color: #666;
 }
@@ -107,7 +103,32 @@ main {
 }
 
 .course-item:hover {
-  background-color: #effcff; /* 호버 시 배경색 변경 */
+  background-color: #e2f5ff; /* 호버 시 배경색 변 */
+}
+
+.my-course {
+  display: flex; /* 추가 */
+  justify-content: center; /* 추가 */
+  align-items: center; /* 기존 */
+  width: 170px;
+  height: 40px;
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  background-color: #077fff;
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  margin: 0 auto; /* 추가: 버튼 자체를 컨테이너 내에서 가운데 정렬 */
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.my-course:hover {
+  transform: scale(1.02);
+  background-color: #0060c7; /* 더 진한 파란색으로 변경 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 추가 */
+  transition: all 0.3s ease; /* 부드러운 전환 효과 */
 }
 
 .place-details {
@@ -116,27 +137,29 @@ main {
 
 .place-detail {
   width: 100%;
-
+  cursor: pointer;
   height: 200px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  transition: background-color 0.5s ease; /* 부드러운 배경색 전환 효과 */
+  border-bottom: 3px solid #eee;
   overflow: hidden;
   display: flex;
   align-items: center;
 }
 
+.place-detail:hover {
+  background-color: #e2f5ff;
+}
 .place-image {
   width: 140px;
   height: 140px;
   object-fit: cover;
   border-radius: 10px;
-  margin: 0 10px 0 30px;
+  margin: 0 10px 0 10px;
 }
 
 .place-info {
   flex: 1;
-  padding: 10px;
+  padding: 0 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -158,7 +181,7 @@ main {
 .heart-button {
   background: none;
   border: none;
-  font-size: 28px;
+  font-size: 20px;
   cursor: pointer;
   color: #ff0000;
   padding: 0;
@@ -249,62 +272,61 @@ h3,
 
 .custom-overlay {
   position: relative;
-  width: 350px;
-  height: 400px;
+  width: 300px;
+  height: 360px;
   background: white;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden; /* 추가: 내용이 넘치지 않도록 설정 */
 }
 
 .overlay-content {
-  padding: 15px;
+  padding: 0;
+  height: 100%;
+  display: flex; /* 추가: flex 컨테이너로 설정 */
+  flex-direction: column; /* 추가: 세로 방향 정렬 */
 }
 
 .overlay-image {
-  width: 320px;
-  height: 240px;
+  width: 100%;
+  height: 240px; /* 수정: 높이 조정 */
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: 5px 5px 0 0;
 }
 
 .overlay-info {
+  flex: 1; /* 추가: 남은 공간 차지 */
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  justify-content: space-between; /* 추가: 내용 간격 조절 */
 }
 
 .overlay-title {
-  font-size: 24px;
+  font-size: 20px; /* 수정: 글자 크기 조정 */
   font-weight: bold;
-  margin: 5px 0;
-}
-
-.overlay-description {
-  font-size: 12px;
-  margin: 5px 0;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
+  margin: 10px 0 5px 10px; /* 수정: 마진 조정 */
+  padding-left: 8px;
 }
 
 .overlay-address {
-  font-size: 8px;
+  font-size: 14px; /* 수정: 글자 크기 조정 */
   color: #666;
-  margin: 5px 0;
+  margin: 0 0 10px 10px; /* 수정: 마진 조정 */
+  padding-left: 8px;
 }
 
 .overlay-button {
-  align-self: flex-end;
-  background-color: #077fff;
-  color: white;
+  width: 100%;
+  align-self: stretch; /* 버튼을 컨테이너 너비에 맞춤 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  color: #888; /* 글자색 변경 */
   border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
+  border-top: 1px solid #ddd; /* 상단 테두리 추가 */
+  padding: 10px 0; /* 상하 패딩만 적용 */
   cursor: pointer;
   font-size: 12px;
-  margin-top: 5px;
+  margin-top: auto; /* 하단 정렬을 위해 자동 마진 적용 */
+  background: none; /* 배경색 제거 */
 }
 
 .overlay-arrow {
@@ -434,6 +456,7 @@ h3,
     text-align: center;
     background: none;
     border: none;
+
     font-size: 20px; /* 버튼 크기 줄여서 공간 확보 */
     cursor: pointer;
     margin-top: 3px; /* 상단 마진 줄임 */
@@ -449,14 +472,15 @@ h3,
   }
 
   .course-item {
+    position: relative;
     display: flex;
-    flex-direction: column-reverse; /* 자식 요소 순서 반대로 */
+    flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
     border: 1px solid #ddd;
     border-radius: 10px;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     text-align: center;
     font-family: "Arial", sans-serif;
     cursor: pointer;
@@ -469,15 +493,47 @@ h3,
     flex: none;
   }
 
+  /* 첫 번째와 마지막을 제외한 요소에만 왼쪽, 오른쪽 여백 추가 */
+  .course-item:not(:first-child) {
+    margin-left: 10px;
+  }
+
+  .course-item:not(:last-child) {
+    margin-right: 10px;
+  }
+
+  .course-item:hover {
+    background-color: #effcff;
+    transform: scale(1.05);
+  }
   .course-item:hover {
     background-color: #effcff;
     transform: scale(1.05);
   }
 
+  .course-item {
+    position: relative; /* 자식 요소의 절대 위치를 위해 relative 설정 */
+  }
+
   .course-item h3 {
-    font-size: 16px;
-    margin: 5px 0 0 0; /* 하단에 있던 마진을 상단으로 이동 */
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    margin: 0;
     font-weight: bold;
+    font-size: 16px;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.3); /* 반투명 검정색 */
+    z-index: 0;
+  }
+
+  course-item:last-child h3 {
+    color: black; /* 마지막 요소 글씨 색상 검정으로 설정 */
+    background-color: transparent; /* 마지막 요소 배경을 투명으로 설정 */
   }
 
   .course-item img {
@@ -508,100 +564,6 @@ h3,
   .course-item .tags span {
     display: none;
     margin-right: 8px;
-  }
-  .custom-overlay {
-    position: relative;
-    width: 320px; /* 너비 증가 */
-    height: 380px; /* 높이 증가 */
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  }
-
-  .overlay-content {
-    padding: 15px; /* 패딩 증가 */
-  }
-
-  .overlay-image {
-    width: 100%; /* 너비를 100%로 설정 */
-    height: 180px; /* 높이 증가 */
-    object-fit: cover;
-    border-radius: 5px;
-  }
-
-  .overlay-info {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px; /* 간격 증가 */
-  }
-
-  .overlay-title {
-    font-size: 30px; /* 폰트 크기 증가 */
-    font-weight: bold;
-    margin: 5px 0; /* 간격 증가 */
-  }
-
-  .overlay-description {
-    font-size: 20px; /* 폰트 크기 증가 */
-
-    margin: 5px 0; /* 간격 증가 */
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* 최대 줄 수 설정 */
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-  }
-
-  .overlay-address {
-    font-size: 12px; /* 폰트 크기 증가 */
-    color: #666;
-    margin: 5px 0; /* 간격 증가 */
-  }
-
-  .overlay-button {
-    align-self: flex-end;
-    background-color: #077fff;
-    color: white;
-    border: none;
-    padding: 6px 12px; /* 버튼 패딩 증가 */
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 12px; /* 버튼 폰트 크기 증가 */
-    margin-top: 10px; /* 간격 증가 */
-  }
-
-  .overlay-arrow {
-    position: absolute;
-    bottom: -8px; /* 위치 조정 */
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent; /* 크기 증가 */
-    border-right: 8px solid transparent; /* 크기 증가 */
-    border-top: 8px solid white; /* 크기 증가 */
-    transform: translateX(-50%);
-  }
-
-  .overlay-close {
-    position: absolute;
-    top: 8px; /* 위치 조정 */
-    right: 8px; /* 위치 조정 */
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 30px; /* 크기 증가 */
-    height: 30px; /* 크기 증가 */
-    font-size: 16px; /* 폰트 크기 증가 */
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-  }
-
-  .overlay-close:hover {
-    background: rgba(0, 0, 0, 0.7);
   }
 }
 
@@ -715,9 +677,9 @@ h3,
   }
 
   .course-item {
-    position: relative; /* 자식 요소에 대해 상대적인 위치 설정 */
+    position: relative;
     display: flex;
-    flex-direction: column-reverse; /* 자식 요소 순서 반대로 */
+    flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
     border: 1px solid #ddd;
@@ -735,6 +697,20 @@ h3,
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     flex: none;
   }
+
+  /* 첫 번째와 마지막을 제외한 요소에만 왼쪽, 오른쪽 여백 추가 */
+  .course-item:not(:first-child) {
+    margin-left: 10px;
+  }
+
+  .course-item:not(:last-child) {
+    margin-right: 10px;
+  }
+
+  .course-item:hover {
+    background-color: #effcff;
+    transform: scale(1.05);
+  }
   .course-item:hover {
     background-color: #effcff;
     transform: scale(1.05);
@@ -745,29 +721,24 @@ h3,
   }
 
   .course-item h3 {
-    position: absolute; /* 절대 위치 설정 */
-    bottom: 10px; /* 이미지 하단에서 10px 위로 위치 조정 */
-    left: 10px; /* 왼쪽에서 10px 떨어진 위치 */
-    margin: 0; /* 마진 제거 */
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    margin: 0;
     font-weight: bold;
-    font-size: 16px; /* 폰트 크기 설정 */
-    color: white; /* 텍스트 색상을 흰색으로 설정 */
-    white-space: nowrap; /* 줄 바꿈 방지 */
-    overflow: hidden; /* 넘치는 텍스트 숨김 */
-    text-overflow: ellipsis; /* 넘치는 텍스트가 있을 경우 생략 부호(...) 표시 */
+    font-size: 16px;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.3); /* 반투명 검정색 */
+    z-index: 0;
   }
 
-  .course-item h3::after {
-    content: ""; /* 가상 요소의 내용 설정 */
-    position: absolute; /* 절대 위치 설정 */
-    left: -5px; /* 텍스트 왼쪽으로 5px 이동 */
-    right: -5px; /* 텍스트 오른쪽으로 5px 이동 */
-    top: 50%; /* 텍스트 중앙에 맞춤 */
-    transform: translateY(-50%); /* 수직 중앙 정렬을 위한 변환 */
-    background-color: rgba(0, 0, 0, 0.7); /* 반투명 검정 배경 추가 */
-    padding: 8px 12px; /* 배경에 패딩 추가 (위아래 8px, 좌우 12px) */
-    border-radius: 5px; /* 배경 모서리 둥글게 */
-    z-index: -1; /* 텍스트 뒤에 위치하도록 설정 */
+  .course-item:last-child h3 {
+    color: black; /* 마지막 요소 글씨 색상 검정으로 설정 */
+    background-color: transparent; /* 마지막 요소 배경을 투명으로 설정 */
   }
 
   .course-item img {
@@ -775,7 +746,6 @@ h3,
     height: 200px;
     border-radius: 5px;
     max-width: 100%;
-    object-fit: cover; /* 이미지 비율 유지 */
   }
   /* 각 .course-item 안의 마지막 이미지에만 적용 */
   .course-item img:last-child {
@@ -802,15 +772,17 @@ h3,
   }
   .custom-overlay {
     position: relative;
-    width: 300px; /* 너비 줄임 */
-    height: 300px; /* 높이 줄임 */
+    width: 250px; /* 너비 유지 */
+    height: 250px; /* 높이 유지 */
     background: white;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden; /* 내용이 넘치지 않도록 설정 */
   }
 
   .overlay-content {
-    padding: 10px; /* 패딩 줄임 */
+    padding: 5px; /* 패딩 줄임 */
+    height: calc(100% - 45px); /* 이미지와 화살표 버튼을 고려하여 높이 조정 */
   }
 
   .overlay-image {
@@ -823,18 +795,18 @@ h3,
   .overlay-info {
     display: flex;
     flex-direction: column;
-    margin-top: 8px; /* 간격 줄임 */
+    margin-top: 5px; /* 간격 줄임 */
   }
 
   .overlay-title {
-    font-size: 18px; /* 폰트 크기 줄임 */
+    font-size: 16px; /* 폰트 크기 줄임 */
     font-weight: bold;
-    margin: 3px 0; /* 간격 줄임 */
+    margin: 2px 0; /* 간격 줄임 */
   }
 
   .overlay-description {
-    font-size: 10px; /* 폰트 크기 줄임 */
-    margin: 3px 0; /* 간격 줄임 */
+    font-size: 10px; /* 폰트 크기 유지 */
+    margin: 2px 0; /* 간격 줄임 */
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 3; /* 최대 줄 수 설정 */
@@ -843,9 +815,9 @@ h3,
   }
 
   .overlay-address {
-    font-size: 6px; /* 폰트 크기 줄임 */
+    font-size: 11px; /* 폰트 크기 줄임 */
     color: #666;
-    margin: 3px 0; /* 간격 줄임 */
+    margin: 2px 0; /* 간격 줄임 */
   }
 
   .overlay-button {
@@ -853,10 +825,10 @@ h3,
     background-color: #077fff;
     color: white;
     border: none;
-    padding: 4px 8px; /* 버튼 패딩 줄임 */
+    padding: 4px 8px; /* 버튼 패딩 유지 */
     border-radius: 5px;
     cursor: pointer;
-    font-size: 10px; /* 버튼 폰트 크기 줄임 */
+    font-size: 10px; /* 버튼 폰트 크기 유지 */
     margin-top: 5px;
   }
 
@@ -880,9 +852,9 @@ h3,
     color: white;
     border: none;
     border-radius: 50%;
-    width: 25px; /* 크기 줄임 */
-    height: 25px; /* 크기 줄임 */
-    font-size: 14px; /* 폰트 크기 줄임 */
+    width: 25px; /* 크기 유지 */
+    height: 25px; /* 크기 유지 */
+    font-size: 14px; /* 폰트 크기 유지 */
     cursor: pointer;
     display: flex;
     justify-content: center;
