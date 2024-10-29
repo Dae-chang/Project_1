@@ -28,7 +28,7 @@ async function displayAllAttractions() {
     markers.forEach((marker) => marker.setMap(null));
     markers = [];
 
-    // 선택된 관광지 ��기화
+    // 선택된 관광지 ��화
     selectedAttractions.clear();
 
     if (!allCoursesData) {
@@ -57,12 +57,13 @@ async function displayAllAttractions() {
       markers = [];
       selectedAttractions.clear();
     });
+
     await displayAllAttractionsGrid(allCoursesData, "create");
 
     courseDetailElement.scrollTop = 0;
   } catch (error) {
     console.error("관광지 표시 중 오류 발생:", error);
-    alert("관광지 표시 중 오류가 발생했습니다. 자세한 내용은 콘솔을 확인해주세요.");
+    alert("관광지 표시 중 오류가 발생했습니다. 자세한 ��용은 콘솔을 확인해주세요.");
   }
 }
 
@@ -185,7 +186,7 @@ function updateConfirmationButton() {
       confirmationDiv.id = "attraction-confirmation";
       confirmationDiv.className = "confirmation-fixed";
 
-      // 선택된 관광지가 있을 때만 입력���과 확인 버튼 표시
+      // 선택된 관광지가 있을 때만 입력과 확인 버튼 표시
       confirmationDiv.innerHTML = `
         ${
           selectedAttractions.size > 0
@@ -329,6 +330,40 @@ function renderUserCourses(courses) {
         <h3>${course.course_name}</h3>
         <p>생성일: ${course.created_at}</p>
       `;
+
+      // 삭제 버튼 추가
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "삭제하기";
+      deleteButton.addEventListener("click", async () => {
+        const confirmDelete = confirm(`"${course.course_name}" 코스를 삭제하시겠습니까?`);
+        if (confirmDelete) {
+          try {
+            const response = await fetch("../php/course_delete.php", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              credentials: "include",
+              body: JSON.stringify({
+                courseID: course.course_id,
+              }),
+            });
+
+            if (!response.ok) {
+              throw new Error("삭제에 실패했습니다.");
+            }
+
+            alert("코스가 삭제되었습니다.");
+            // 코스 목록 새로고침
+            await loadUserCourses();
+          } catch (error) {
+            console.error("코스 삭제 중 오류:", error);
+            alert("코스 삭제 중 오류가 발생했습니다: " + error.message);
+          }
+        }
+      });
+
+      courseElement.appendChild(deleteButton);
       courseElement.addEventListener("click", () => displayCourseDetails(course));
       courseListElement.appendChild(courseElement);
     });
@@ -338,7 +373,6 @@ function renderUserCourses(courses) {
 // 코스 상세 정보를 표시하는 함수
 async function displayCourseDetails(course) {
   try {
-    console.log(course)
     // allCoursesData가 없는 경우 먼저 데이터를 로드
     if (!allCoursesData) {
       const response = await fetch(`../script/response.json`);
@@ -378,50 +412,25 @@ async function displayCourseDetails(course) {
       confirmationDiv.remove();
     }
 
-    //삭제버튼 생성
-    const deleteButton = document.createElement('button');
-    deleteButton.id = 'delete-course';
-    deleteButton.textContent = '삭제하기';
-    deleteButton.addEventListener("click", async () => {
-      console.log(course.course_id);
-      
-      const response = await fetch("../php/course_delete.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          courseID: course.course_id,
-        }),
-      });
-      console.log("응답 상태:", response.status);
-      const responseData = await response.json();
-      console.log("응답 데이터:", responseData);
-
-      if (!response.ok) {
-        throw new Error(responseData.error || "삭제에 실패했습니다.");
-      }
-    })
-    courseDetailElement.appendChild(deleteButton);
-
-
-    deleteButton.addEventListener("click", () => {
-      
-    })
-
-
     // 지도 마커 업데이트
     markers.forEach((marker) => marker.setMap(null));
     markers = [];
 
     for (const attraction of attractionsWithDetails) {
       await addMarkerToMap(attraction);
+
+      // CustomOverlay 추가
+      const overlay = new kakao.maps.CustomOverlay({
+        position: new kakao.maps.LatLng(attraction.위도, attraction.경도), // 위도, 경도 사용
+        content: `<div class="custom-overlay">${attraction.관광지}</div>`,
+        yAnchor: 1,
+      });
+      overlay.setMap(map);
     }
 
     courseDetailElement.scrollTop = 0;
   } catch (error) {
-    console.error("코스 상세 ��보 표시 중 오류:", error);
+    console.error("코스 상세 정보를 불러오는 중 오류가 발생했습니다: ", error);
     alert(`코스 상세 정보를 불러오는 중 오류가 발생했습니다: ${error.message}`);
   }
 }
@@ -460,7 +469,7 @@ async function addMarkerToMap(place) {
   }
 }
 
-// 모든 마커가 보이도록 지도 조정
+// 모��� 마커가 보이도록 지도 조정
 function adjustMapToShowAllMarkers() {
   if (markers.length === 0) return;
 
@@ -504,7 +513,7 @@ function getCoordinates(address) {
   });
 }
 
-// 페이지 로드 시 초기화
+// 페이지 로드 시 초기��
 document.addEventListener("DOMContentLoaded", () => {
   loadUserCourses();
   if (typeof initMap === "function" && !window.mapInitialized) {
@@ -513,7 +522,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// ��커 업데이트 함수 (비동기)
+// 커 업데이트 함수 (비동기)
 async function updateMarkers() {
   for (let i = markers.length - 1; i >= 0; i--) {
     const marker = markers[i];
