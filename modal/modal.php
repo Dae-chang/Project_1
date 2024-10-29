@@ -1,6 +1,6 @@
 <?php
 // JSON 파일에서 데이터 로드
-$jsonData = file_get_contents('../script/response.json');
+$jsonData = file_get_contents('../map/script/response.json');
 $data = json_decode($jsonData, true);
 $tourSpots = $data['data'];
 
@@ -33,9 +33,10 @@ $modalHtml = <<<HTML
         <h2>{$spotInfo['관광지']}</h2>
         <button class="close-button">&times;</button>
         <p class="description">{$spotInfo['코스설명']}</p>
-        <p class="address"><strong>주소:</strong> {$spotInfo['주소']}</p>
-        <p class="homepage"><strong>홈페이지:</strong> <a href="{$spotInfo['홈페이지']}" target="_blank">{$spotInfo['홈페이지']}</a></p>
-
+        <div class="bottom-info">
+            <p class="address"><strong>주소:</strong> {$spotInfo['주소']}</p>
+            <p class="homepage"><strong>홈페이지:</strong> <a href="{$spotInfo['홈페이지']}" target="_blank">{$spotInfo['홈페이지']}</a></p>
+        </div>
     </div>
 </div>
 HTML;

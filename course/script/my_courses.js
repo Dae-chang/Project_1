@@ -1,5 +1,5 @@
-let allCoursesData;
 let selectedAttractions = new Set();
+let allCoursesData = null;
 
 // 코스 만들기 버튼 렌더링
 function renderCreateCourseButton() {
@@ -15,7 +15,7 @@ function renderCreateCourseButton() {
   createCourseButton.className = "course-item";
   createCourseButton.innerHTML = `
     <h3>관광지 추가하기</h3>
-    <img src="../img/map_img_plus.jpg" alt="모든 관광지" style="width: 200px; height: 200px;">
+    <img src="../img/map_img_plus.jpg" alt="모든 관광지" class="create-course-image">
   `;
   createCourseButton.addEventListener("click", displayAllAttractions);
   courseListElement.appendChild(createCourseButton);
@@ -24,6 +24,13 @@ function renderCreateCourseButton() {
 // 모든 관광지 표시
 async function displayAllAttractions() {
   try {
+    // 기존 마커 모두 삭제
+    markers.forEach((marker) => marker.setMap(null));
+    markers = [];
+
+    // 선택된 관광지 ��기화
+    selectedAttractions.clear();
+
     if (!allCoursesData) {
       const response = await fetch(`../script/response.json`);
       if (!response.ok) {
@@ -38,16 +45,20 @@ async function displayAllAttractions() {
 
     const detailTitleElement = document.getElementById("detail-title");
     detailTitleElement.innerHTML = `
-      모든 관광지 <span style="color: #077fff;">목록</span>
-      <button id="close-course-detail" style="float: right; background: none; border: none; font-size: 1.5em; cursor: pointer;">&times;</button>
+      모든 관광지 <span class="detail-title-highlight">목록</span>
+      <button id="close-course-detail">&times;</button>
     `;
 
     const closeButton = document.getElementById("close-course-detail");
     closeButton.addEventListener("click", () => {
       courseDetailElement.style.display = "none";
+      // 닫기 버튼 클릭 시에도 마커와 선택 초기화
+      markers.forEach((marker) => marker.setMap(null));
+      markers = [];
+      selectedAttractions.clear();
     });
 
-    await displayAllAttractionsGrid(allCoursesData);
+    await displayAllAttractionsGrid(allCoursesData, "create");
 
     courseDetailElement.scrollTop = 0;
   } catch (error) {
@@ -56,8 +67,8 @@ async function displayAllAttractions() {
   }
 }
 
-// 모든 관광지를 그리드 형태로 표시
-async function displayAllAttractionsGrid(attractions) {
+// 모든 관광지를 그리드 형태로 표시 (mode 파라미터 추가)
+async function displayAllAttractionsGrid(attractions, mode = "create") {
   const placeDetailsContainer = document.getElementById("place-details");
   placeDetailsContainer.innerHTML = "";
   placeDetailsContainer.className = "attraction-grid";
@@ -68,7 +79,8 @@ async function displayAllAttractionsGrid(attractions) {
 
     for (let j = i; j < i + 2 && j < attractions.length; j++) {
       const place = attractions[j];
-      const attractionElement = createAttractionElement(place);
+      // mode에 따라 다른 방식으로 관광지 요소 생성
+      const attractionElement = mode === "create" ? createSelectableAttractionElement(place) : createReadOnlyAttractionElement(place);
       rowContainer.appendChild(attractionElement);
     }
 
@@ -76,8 +88,8 @@ async function displayAllAttractionsGrid(attractions) {
   }
 }
 
-// 개별 관광지 요소 생성
-function createAttractionElement(place) {
+// 선택 가능한 관광지 요소 생성 (새 코스 만들기용)
+function createSelectableAttractionElement(place) {
   const attractionElement = document.createElement("div");
   attractionElement.className = "attraction-item";
 
@@ -103,7 +115,38 @@ function createAttractionElement(place) {
   attractionElement.appendChild(imageContainer);
   attractionElement.appendChild(nameContainer);
 
+  // 선택 이벤트 추가
   attractionElement.addEventListener("click", () => toggleAttractionSelection(attractionElement, place));
+
+  return attractionElement;
+}
+
+// 읽기 전용 관광지 요소 생성 (코스 상세보기용)
+function createReadOnlyAttractionElement(place) {
+  const attractionElement = document.createElement("div");
+  attractionElement.className = "attraction-item";
+
+  const imageContainer = document.createElement("div");
+  imageContainer.className = "attraction-image-container";
+
+  const image = document.createElement("img");
+  image.src = `../img/detail_img_${place.관광지번호}.jpg`;
+  image.alt = place.관광지;
+  image.className = "attraction-image";
+
+  imageContainer.appendChild(image);
+
+  const nameContainer = document.createElement("div");
+  nameContainer.className = "attraction-name-container";
+
+  const name = document.createElement("p");
+  name.textContent = place.관광지;
+  name.className = "attraction-name";
+
+  nameContainer.appendChild(name);
+
+  attractionElement.appendChild(imageContainer);
+  attractionElement.appendChild(nameContainer);
 
   return attractionElement;
 }
@@ -118,10 +161,235 @@ async function toggleAttractionSelection(element, place) {
     removeCheckmark(element);
     removeMarkerFromMap(place.관광지번호);
   } else {
+    if (selectedAttractions.size >= 7) {
+      alert("한 코스에는 최대 7개의 관광지만 저장 가능합니다.");
+      return;
+    }
+
     selectedAttractions.add(place.관광지번호);
     element.classList.add("attraction-selected");
     addCheckmark(element);
     await addMarkerToMap(place);
+  }
+
+  // 선택된 관광지가 있을 때 확인 버튼 표시/숨김 처리
+  updateConfirmationButton();
+}
+
+// 확인 버튼 업데이트 함수 추가
+function updateConfirmationButton() {
+  let confirmationDiv = document.getElementById("attraction-confirmation");
+
+  if (selectedAttractions.size > 0) {
+    if (!confirmationDiv) {
+      confirmationDiv = document.createElement("div");
+      confirmationDiv.id = "attraction-confirmation";
+      confirmationDiv.className = "confirmation-fixed";
+
+      // 선택된 관광지가 있을 때만 입력���과 확인 버튼 표시
+      confirmationDiv.innerHTML = `
+        ${
+          selectedAttractions.size > 0
+            ? `
+          <div class="course-name-input">
+            <input type="text" id="course-name" placeholder="코스 이름을 입력하세요">
+          </div>
+        `
+            : ""
+        }
+        <button id="confirm-attractions" class="confirm-btn">확인</button>
+      `;
+
+      document.getElementById("course-detail").appendChild(confirmationDiv);
+
+      // 확인 버튼 클릭 이벤트
+      document.getElementById("confirm-attractions").addEventListener("click", async () => {
+        const courseName = document.getElementById("course-name").value.trim();
+
+        if (!courseName) {
+          alert("코스 이름을 입력해주세요.");
+          return;
+        }
+
+        // 선택된 관광지 정보 가져오기
+        const attractions = [];
+        for (let attractionId of selectedAttractions) {
+          const attraction = allCoursesData.find((item) => item.관광지번호 === parseInt(attractionId));
+          if (attraction) {
+            attractions.push({
+              관광지: attraction.관광지,
+            });
+          }
+        }
+
+        // 선택된 관광지가 없는 경우 처리
+        if (attractions.length === 0) {
+          alert("선택된 관광지가 없습니다.");
+          return;
+        }
+
+        try {
+          const response = await fetch("../php/course_create.php", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify({
+              courseName: courseName,
+              attractions: attractions,
+            }),
+          });
+
+          console.log("응답 상태:", response.status);
+          const responseData = await response.json();
+          console.log("응답 데이터:", responseData);
+
+          if (!response.ok) {
+            throw new Error(responseData.error || "코스 생성에 실패했습니다.");
+          }
+
+          alert("새로운 코스가 생성되었습니다!");
+
+          // 선택된 관광지 초기화
+          selectedAttractions.clear();
+
+          // 마커 제거
+          markers.forEach((marker) => marker.setMap(null));
+          markers = [];
+
+          // 상세 패널 닫기
+          document.getElementById("course-detail").style.display = "none";
+
+          // 코스 목록 새로고침
+          await loadUserCourses();
+        } catch (error) {
+          console.error("코스 생성 중 오류:", error);
+          alert("코스 생성 중 오류가 발생했습니다: " + error.message);
+        }
+      });
+    }
+  } else {
+    if (confirmationDiv) {
+      confirmationDiv.remove();
+    }
+  }
+}
+
+// 코스 목록 로드
+async function loadUserCourses() {
+  try {
+    const response = await fetch("../php/course_user.php", {
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        window.location.href = "../../login/php/login.php";
+        return;
+      }
+      throw new Error("코스 목록을 불러오는데 실패했습니다.");
+    }
+
+    const data = await response.json();
+    if (data.success) {
+      renderUserCourses(data.courses);
+    }
+  } catch (error) {
+    console.error("코스 목록 로딩 중 오류:", error);
+    renderCreateCourseButton();
+  }
+}
+
+// 사용자의 코스 목록을 렌더링하는 함수
+function renderUserCourses(courses) {
+  const courseListElement = document.getElementById("course-list");
+  courseListElement.innerHTML = "";
+
+  const customCourseTitle = document.createElement("h2");
+  customCourseTitle.textContent = "나의 코스 목록";
+  customCourseTitle.className = "custom-course-title";
+  courseListElement.appendChild(customCourseTitle);
+
+  // 코스 생성 버튼 추가
+  const createCourseButton = document.createElement("div");
+  createCourseButton.className = "course-item";
+  createCourseButton.innerHTML = `
+    <h3>새로운 코스 만들기</h3>
+    <img src="../img/map_img_plus.jpg" alt="코스 만들기" class="create-course-image">
+  `;
+  createCourseButton.addEventListener("click", displayAllAttractions);
+  courseListElement.appendChild(createCourseButton);
+
+  // 사용자의 코스 목록 렌더링
+  if (courses && courses.length > 0) {
+    courses.forEach((course) => {
+      const courseElement = document.createElement("div");
+      courseElement.className = "course-item";
+      courseElement.innerHTML = `
+        <h3>${course.course_name}</h3>
+        <p>생성일: ${course.created_at}</p>
+      `;
+      courseElement.addEventListener("click", () => displayCourseDetails(course));
+      courseListElement.appendChild(courseElement);
+    });
+  }
+}
+
+// 코스 상세 정보를 표시하는 함수
+async function displayCourseDetails(course) {
+  try {
+    // allCoursesData가 없는 경우 먼저 데이터를 로드
+    if (!allCoursesData) {
+      const response = await fetch(`../script/response.json`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const jsonData = await response.json();
+      allCoursesData = jsonData.data;
+    }
+
+    const courseDetailElement = document.getElementById("course-detail");
+    courseDetailElement.style.display = "block";
+
+    const detailTitleElement = document.getElementById("detail-title");
+    detailTitleElement.innerHTML = `
+      ${course.course_name} <span class="detail-title-highlight">관광지 목록</span>
+      <button id="close-course-detail">&times;</button>
+    `;
+
+    const closeButton = document.getElementById("close-course-detail");
+    closeButton.addEventListener("click", () => {
+      courseDetailElement.style.display = "none";
+    });
+
+    // course.attractions를 사용하여 관광지 정보 매칭
+    const attractionsWithDetails = course.attractions.map((attractionName) => {
+      const fullDetails = allCoursesData.find((item) => item.관광지 === attractionName);
+      return fullDetails || { 관광지: attractionName };
+    });
+
+    // 읽기 전용 모드로 관광지 표시
+    await displayAllAttractionsGrid(attractionsWithDetails, "view");
+
+    // 코스 이름 입력 창 닫기
+    const confirmationDiv = document.getElementById("attraction-confirmation");
+    if (confirmationDiv) {
+      confirmationDiv.remove();
+    }
+
+    // 지도 마커 업데이트
+    markers.forEach((marker) => marker.setMap(null));
+    markers = [];
+
+    for (const attraction of attractionsWithDetails) {
+      await addMarkerToMap(attraction);
+    }
+
+    courseDetailElement.scrollTop = 0;
+  } catch (error) {
+    console.error("코스 상세 ��보 표시 중 오류:", error);
+    alert(`코스 상세 정보를 불러오는 중 오류가 발생했습니다: ${error.message}`);
   }
 }
 
@@ -205,22 +473,14 @@ function getCoordinates(address) {
 
 // 페이지 로드 시 초기화
 document.addEventListener("DOMContentLoaded", () => {
-  renderCreateCourseButton();
+  loadUserCourses();
   if (typeof initMap === "function" && !window.mapInitialized) {
-    initMap(); // 지도 초기화 함수 호출 (map.js에 정의되어 있어야 함)
+    initMap();
     window.mapInitialized = true;
-
-    // 지도 이벤트 리스너 추가
-    kakao.maps.event.addListener(map, "dragend", () => {
-      updateMarkers().catch((error) => console.error("마커 업데이트 중 오류 발생:", error));
-    });
-    kakao.maps.event.addListener(map, "zoom_changed", () => {
-      updateMarkers().catch((error) => console.error("마커 업데이트 중 오류 발생:", error));
-    });
   }
 });
 
-// 마커 업데이트 함수 (비동기)
+// ��커 업데이트 함수 (비동기)
 async function updateMarkers() {
   for (let i = markers.length - 1; i >= 0; i--) {
     const marker = markers[i];

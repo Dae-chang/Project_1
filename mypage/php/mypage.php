@@ -6,7 +6,7 @@
     <title>마이페이지 - 찜한 관광지 및 후기</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../../header/header.css">
-    <link rel="stylesheet" href="../css/modal.css">
+    <link rel="stylesheet" href="../../modal/modal.css">
 </head>
 <body>
 <?php include '../../header/header.php'; ?>
@@ -79,7 +79,7 @@
         document.querySelectorAll('.favorite-item').forEach(item => {
             item.addEventListener('click', function() {
                 const spotName = this.getAttribute('data-name');
-                fetch(`modal.php?name=${encodeURIComponent(spotName)}`)
+                fetch(`../../modal/modal.php?name=${encodeURIComponent(spotName)}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.error) {

@@ -36,12 +36,27 @@
   height: 600px;
   padding: 20px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.bottom-info {
+  position: absolute;
+  bottom: 60px;
+  left: 20px;
+  right: 20px;
+  background-color: white;
 }
 
 .modal-info h2 {
   font-size: 50px;
   font-weight: bold;
-  margin-top: 0;
+  margin: 10px 0 0 30px;
+}
+
+.modal-info p {
+  margin: 10px 40px 0 30px;
+  font-weight: 300;
 }
 
 .close-button {
@@ -57,9 +72,12 @@
 .description {
   font-size: 20px;
   margin-bottom: 20px;
+  overflow-y: auto;
+  max-height: calc(100% - 150px); /* 상단 제목과 하단 정보 공간 확보 */
 }
 
 .address,
 .homepage {
   margin-bottom: 10px;
+  margin-top: auto;
 }
