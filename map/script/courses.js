@@ -45,7 +45,14 @@ function renderCourseList() {
       <button class="my-course">나만의 코스</button>
     `;
   myCustomCourseElement.addEventListener("click", () => {
-    window.location.href = "../../course/php/map.php";
+    console.log("Current login status:", isLoggedIn); // 디버깅용
+    if (typeof isLoggedIn === "undefined" || !isLoggedIn) {
+      alert("로그인이 필요한 서비스입니다.");
+      window.location.href = "../../login/php/login.php";
+      return;
+    } else {
+      window.location.href = "../../course/php/map.php";
+    }
   });
   courseListElement.appendChild(myCustomCourseElement);
 
@@ -255,6 +262,13 @@ function updateCourseBookmarkInDatabase(attraction) {
 
 // 개별 관광지 하트 버튼 토글 함수
 function toggleHeart(placeName) {
+  console.log("Current login status:", isLoggedIn); // 디버깅용
+  if (typeof isLoggedIn === "undefined" || !isLoggedIn) {
+    alert("로그인이 필요한 서비스입니다.");
+    window.location.href = "../../login/php/login.php";
+    return;
+  }
+
   if (bookmarkedPlaces.has(placeName)) {
     bookmarkedPlaces.delete(placeName);
   } else {

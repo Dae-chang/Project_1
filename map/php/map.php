@@ -6,18 +6,24 @@
     <title>대구 관광지 지도</title>
     <link rel="stylesheet" href="../css/styles.css"> 
     <link rel="stylesheet" href="../../header/header.css">
-    <link rel="stylesheet" href="../../modal/modal.css"> <!-- 모달 CSS 추가 -->
+    <link rel="stylesheet" href="../../modal/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-   
+    
     <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=dc62460607d7fe5bed6dabe6348dd72a&libraries=services"></script>
-    <script src="../script/map.js"></script>
-    <script src="../script/courses.js"></script>
-    <script src="../script/ui.js"></script>
-    <script src="../script/main.js"></script>
 </head>
 <body>
 <?php include '../../header/header.php'; ?>
+
+<!-- header.php 포함 후 스크립트 실행 -->
+<script>
+    const isLoggedIn = <?php echo isset($_SESSION['userID']) ? 'true' : 'false'; ?>;
+    console.log('Login status:', isLoggedIn);
+</script>
+
+<script src="../script/map.js"></script>
+<script src="../script/courses.js"></script>
+<script src="../script/ui.js"></script>
+<script src="../script/main.js"></script>
 
 <main>
     <div style="display: flex; flex: 1;">

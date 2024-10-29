@@ -43,7 +43,7 @@
                                 $spotInfo = $spot;
                                 break;
                             }
-                        }
+                        }   
                         if ($spotInfo) {
                             echo "<div class='favorite-item' data-name='{$spotInfo['관광지']}'>";
                             echo "<img src='../img/detail_img_{$spotInfo['관광지번호']}.jpg' alt='찜한 관광지 {$spotInfo['관광지']}'>";
