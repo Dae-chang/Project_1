@@ -9,7 +9,7 @@ session_start(); // 세션 시작
     <nav class="header-nav">
         <a href="../../index/php/index.php#home">HOME</a>
         <a href="../../map/php/map.php">추천 여행지</a>
-        <a href="../../mypage/php/mypage.php">나만의 여행지</a>
+        <a href="../../course/php/map.php">나만의 여행지</a>
     </nav>
 
     <div class="user-actions">
@@ -33,7 +33,7 @@ session_start(); // 세션 시작
             <a href="../../login/php/login.php">로그인</a>
         <?php endif; ?>
         <a href="../../map/php/map.php">추천 여행지</a>
-        <a href="../../mypage/php/mypage.php">나만의 여행지</a>
+        <a href="../../course/php/map.php">나만의 여행지</a>
     </div>
 
 

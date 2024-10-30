@@ -17,8 +17,12 @@
 </head>
 
 <body>
-    <?php include '../../header/header.php'; ?>
 
+    <?php include '../../header/header.php'; ?>
+    <script>
+    const isLoggedIn = <?php echo isset($_SESSION['userID']) ? 'true' : 'false'; ?>;
+        console.log('Login status:', isLoggedIn);
+    </script>
     <main>
         <div style="display: flex; flex: 1;">
             <section id="course-list">

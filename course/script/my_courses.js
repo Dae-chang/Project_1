@@ -23,6 +23,13 @@ function renderCreateCourseButton() {
 
 // 모든 관광지 표시
 async function displayAllAttractions() {
+  console.log("Current login status:", isLoggedIn); // 디버깅용
+  if (typeof isLoggedIn === "undefined" || !isLoggedIn) {
+    alert("로그인이 필요한 서비스입니다.");
+    window.location.href = "../../login/php/login.php";
+    return;
+  }
+
   try {
     // 기존 마커 모두 삭제
     markers.forEach((marker) => marker.setMap(null));
@@ -411,7 +418,7 @@ async function displayCourseDetails(course) {
       return fullDetails || { 관광지: attractionName };
     });
 
-    // 읽기 전용 모드로 관광지 표���
+    // 읽기 전용 모드로 관광지 표
     await displayAllAttractionsGrid(attractionsWithDetails, "view");
 
     // 코스 이름 입력 창 닫기
