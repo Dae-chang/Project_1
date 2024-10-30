@@ -7,6 +7,17 @@ header {
   align-items: center;
 }
 
+.header-left {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 20px;
+  width: 7vw;
+  height: 7vw;
+}
+
 .header-nav {
   display: flex;
   justify-content: center;
@@ -106,6 +117,10 @@ header {
 }
 
 @media (max-width: 768px) {
+  .header-left{
+    display: none;
+  }
+
   .header-nav {
     display: none;
   }
@@ -119,8 +134,11 @@ header {
   }
 
   header::before {
-    content: "로고";
-    font-size: 24px;
-    font-weight: bold;
+    content: "";
+    width: 75px;
+    height: 100px;
+    background-image: url("./header_img/mobile_logo.png");
+    background-size: cover;
+    background-position: center;
   }
 }
