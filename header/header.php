@@ -4,10 +4,10 @@ session_start(); // 세션 시작
 
 <header id="home">
     <nav class="header-nav">
+        <img src="../../header/header_img/logo.png" alt="로고">
         <a href="../../index/php/index.php#home">HOME</a>
-        <a href="../../index/php/index.php#information">숙소 찾기</a>
-        <a href="../../index/php/index.php#youtube">추천 영상</a>
         <a href="../../map/php/map.php">추천 여행지</a>
+        <a href="../../mypage/php/mypage.php">나만의 여행지</a>
     </nav>
 
     <div class="user-actions">

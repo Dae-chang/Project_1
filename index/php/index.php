@@ -33,50 +33,73 @@
         <!-- 숙소&교통편 안내 -->
         <section class="information-section" id="information">
             <div class="information" id="info1">
-                <span>숙소를 찾으신다면?</span>
+            <div class="info-text">
+                <span>숙박을 기반으로 <strong>주변정보</strong>를 검색하고 싶을 땐?</span>
+                
+            </div>
                 <a href="https://www.yeogi.com/domestic-accommodations?keyword=%EB%8C%80%EA%B5%AC&autoKeyword=&personal=2&freeForm=true/" target="_blank">
-                    <img src="../img/index_img_6.jpg" alt="여기어때">
+                    <img class="indexImg" src="../img/index_img_10.png" alt="여기어때">
                 </a>
             </div>
             <div class="information" id="info2">
-                <span>다른 숙소 옵션을 원하시나요?</span>
+            <div class="info-text">
+                <span><strong>360도 객실정보</strong>를</span>
+
+                <span>보고싶을 땐?</span>
+            </div>
                 <a href="https://www.yanolja.com/search/%EB%8C%80%EA%B5%AC?pageKey=1729146887534" target="_blank">
-                    <img src="../img/index_img_7.jpg" alt="야놀자">
+                    <img class="indexImg" src="../img/index_img_9.png" alt="야놀자">
                 </a>
             </div>
             <div class="information" id="info3">
-                <span>기차표 예매가 필요하신가요?</span>
+            <div class="info-text">
+                <span><strong>편안한 여행</strong>을 원할 땐?</span>
                 <a href="https://www.letskorail.com/" target="_blank">
-                    <img src="../img/index_img_8.jpg" alt="코레일">
-                </a>
+            </div>  
+            <div class="imgBox">
+                <img class="indexImg" src="../img/index_img_11.jpg" alt="코레일">
+            </div>    
+            </a>
             </div>
         </section>
-        <!-- 흰색 바탕 추가 -->
-        <div class="white-space"></div>
+
         <!-- 대구소개 유튜브 -->
         <section class="youtube-videos" id="youtube">
             <div class="video-container-1">
-                <div class="youtube-videos-title">
-                    <p>대구의 <span style="color: #204cab;">창</span></p>
-                    <p>추천 장소 <span style="color: #f52121;">영상</span></p>
+                <div class="video_title">
+                    <img class="recommendPlaceLogo" src="../img/logo.png" art="로고">
+                   
                 </div>
-
-                <div class="video_small_container">
-                    <div class="video small">
-                        <iframe width="300" height="300" src="https://www.youtube.com/embed/tFwOQTc80DM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
-                    </div>
-                    <div class="video small">
-                        <iframe width="300" height="300" src="https://www.youtube.com/embed/mWTJxF3d-Kk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
-                    </div>
-                </div>
+                <p id="recommendPlace"> 추천 장소 <span style="color: #f52121;">영상</span></p>
             </div>
-            <div class="video-container-2">
-                <div class="video large">
-                    <iframe width="500" height="500" src="https://www.youtube.com/embed/neNAp8ggSoc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
+            <div class="video_boxes">
+            <div class="video_box">
+                <div class="test"> 
+                <div class="youtube_box">
+                    <iframe class="youtube_play"  src="https://www.youtube.com/embed/tFwOQTc80DM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
+                    <li class="youtube_title">요즘힙스터 들은 가봐야 할 여행지</li>
+                    </div>
+            </div>
+                   
+            <div class="video_box">
+            <div class="test"> 
+                    <div class="youtube_box">
+                        <iframe class="youtube_play" src="https://www.youtube.com/embed/mWTJxF3d-Kk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                    <li class="youtube_title">추천가볼만한곳 ep1</li>
+                    </div>
+            </div>
+                
+            <div class="video_box">
+            <div class="test"> 
+            <div class="youtube_box">
+                    <iframe class="youtube_play" src="https://www.youtube.com/embed/neNAp8ggSoc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>       
+                    <li class="youtube_title">대구여행 TOP8</li>
+                    </div>
+            </div>
             </div>
         </section>
 
