@@ -412,6 +412,36 @@ async function displayCourseDetails(course) {
       confirmationDiv.remove();
     }
 
+
+    //삭제버튼 생성
+    const deleteButton = document.createElement("button");
+    deleteButton.id = "delete-course";
+    deleteButton.textContent = "삭제하기";
+    deleteButton.addEventListener("click", async () => {
+      console.log(course.course_id);
+
+      const response = await fetch("../php/course_delete.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          courseID: course.course_id,
+        }),
+      });
+      console.log("응답 상태:", response.status);
+      const responseData = await response.json();
+      console.log("응답 데이터:", responseData);
+
+      if (!response.ok) {
+        throw new Error(responseData.error || "삭제에 실패했습니다.");
+      }
+    });
+    courseDetailElement.appendChild(deleteButton);
+
+    deleteButton.addEventListener("click", () => {});
+
     // 지도 마커 업데이트
     markers.forEach((marker) => marker.setMap(null));
     markers = [];
