@@ -18,6 +18,7 @@
 </head>
 
 <body>
+
     <?php include '../../header/header.php'; ?>
 
     <main>
@@ -52,15 +53,15 @@
                 <span><strong>편안한 여행</strong>을 원할 땐?</span>
                 <a href="https://www.letskorail.com/" target="_blank">
             </div>  
-            <div class="imgBox">
-                <img class="indexImg" src="../img/index_img_11.jpg" alt="코레일">
-            </div>    
+       
+                <img class="indexImg" src="../img/index_img_11.png" alt="코레일">
+      
             </a>
             </div>
         </section>
 
-        <!-- 대구소개 유튜브 -->
-        <section class="youtube-videos" id="youtube">
+      <!-- 대구소개 유튜브 -->
+      <section class="youtube-videos" id="youtube">
             <div class="video-container-1">
                 <div class="video_title">
                     <img class="recommendPlaceLogo" src="../img/logo.png" art="로고">
