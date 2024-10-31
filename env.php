@@ -12,13 +12,13 @@ const GOOGLE_PASSWORD = "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";
 const GOOGLE_SCOPE = "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile";
 const GOOGLE_STATE = "RANDOM_STATE";
 
-const SOCIAL_REDIRECT_URI = "http://localhost/Project_1/php_login.php";  //로그인 성공시 보내는 링크
+const SOCIAL_REDIRECT_URI = "http://llllll18.dothome.co.kr/php_login.php";  //로그인 성공시 보내는 링크
 
 $DBCON = mysqli_connect(
     'localhost', //DB주소
-    'root', //DB아이디
-    '', //DB비밀번호
-    'daechang' //DB명
+    'llllll18', //DB아이디
+    'rmsdudS!2', //DB비밀번호
+    'llllll18' //DB명
 );
 
 
