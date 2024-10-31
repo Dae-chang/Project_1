@@ -10,19 +10,21 @@ header {
 .header-left {
   position: absolute;
   top: 50%;
-  left: 20px;
+  left: 35px;
   transform: translateY(-50%);
-  display: flex;
-  gap: 20px;
-  width: 7vw;
-  height: 7vw;
+}
+
+.header-left img {
+  height: 100%;
+  width: auto;
+  object-fit: none;
 }
 
 .header-nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 50px;
+  gap: 45px;
   height: 100px;
 }
 
@@ -48,7 +50,7 @@ header {
 .user-actions {
   position: absolute;
   top: 50%;
-  right: 20px;
+  right: 30px;
   transform: translateY(-50%);
   display: flex;
   gap: 20px;
@@ -117,7 +119,7 @@ header {
 }
 
 @media (max-width: 768px) {
-  .header-left{
+  .header-left {
     display: none;
   }
 
@@ -133,12 +135,13 @@ header {
     display: block;
   }
 
-  header::before {
-    content: "";
+  .mobile-logo {
+    display: block;
     width: 75px;
     height: 100px;
     background-image: url("./header_img/mobile_logo.png");
     background-size: cover;
     background-position: center;
+    text-decoration: none;
   }
 }

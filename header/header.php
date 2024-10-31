@@ -12,6 +12,8 @@ session_start(); // 세션 시작
         <a href="../../course/php/map.php">나만의 여행지</a>
     </nav>
 
+    <a href="../../index/php/index.php#home" class="mobile-logo"></a>
+
     <div class="user-actions">
         <?php if (isset($_SESSION['userID'])): ?>
             <a href="../../logout.php">로그아웃</a>
@@ -57,6 +59,13 @@ session_start(); // 세션 시작
         // 사이드 메뉴 외부 클릭 시 닫기
         document.addEventListener("click", function(event) {
             if (!sideMenu.contains(event.target) && !hamburgerMenu.contains(event.target)) {
+                sideMenu.style.right = "-200px";
+            }
+        });
+
+        // 화면 크기 변경 감지하여 사이드 메뉴 닫기
+        window.addEventListener("resize", function() {
+            if (window.innerWidth > 768) { // PC 화면 크기일 때 (768px는 필요에 따라 조정 가능)
                 sideMenu.style.right = "-200px";
             }
         });

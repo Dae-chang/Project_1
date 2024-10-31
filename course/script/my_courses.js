@@ -273,6 +273,12 @@ function updateConfirmationButton() {
           markers.forEach((marker) => marker.setMap(null));
           markers = [];
 
+          // attraction-confirmation 창 제거
+          const confirmationDiv = document.getElementById("attraction-confirmation");
+          if (confirmationDiv) {
+            confirmationDiv.remove();
+          }
+
           // 상세 패널 닫기
           document.getElementById("course-detail").style.display = "none";
 
