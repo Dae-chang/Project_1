@@ -332,7 +332,7 @@ function renderUserCourses(courses) {
   customCourseTitle.className = "custom-course-title";
   courseListElement.appendChild(customCourseTitle);
 
-  // 코스 생성 버튼 추가
+  // ���스 생성 버튼 추가
   const createCourseButton = document.createElement("div");
   createCourseButton.className = "course-item";
   createCourseButton.innerHTML = `
@@ -355,7 +355,10 @@ function renderUserCourses(courses) {
       // 삭제 버튼 추가
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "삭제하기";
-      deleteButton.addEventListener("click", async () => {
+      deleteButton.addEventListener("click", async (event) => {
+        // 이벤트 버블링 방지
+        event.stopPropagation();
+
         const confirmDelete = confirm(`"${course.course_name}" 코스를 삭제하시겠습니까?`);
         if (confirmDelete) {
           try {
@@ -375,6 +378,15 @@ function renderUserCourses(courses) {
             }
 
             alert("코스가 삭제되었습니다.");
+
+            // course-detail 패널 닫기
+            const courseDetailElement = document.getElementById("course-detail");
+            courseDetailElement.style.display = "none";
+
+            // 마커 제거
+            markers.forEach((marker) => marker.setMap(null));
+            markers = [];
+
             // 코스 목록 새로고침
             await loadUserCourses();
           } catch (error) {

@@ -16,6 +16,7 @@ session_start(); // 세션 시작
 
     <div class="user-actions">
         <?php if (isset($_SESSION['userID'])): ?>
+            <span class="welcome-message"><?php echo $_SESSION['userName'] . "님"; ?></span>
             <a href="../../logout.php">로그아웃</a>
         <?php else: ?>
             <a href="../../login/php/login.php">로그인</a>
@@ -30,6 +31,7 @@ session_start(); // 세션 시작
 
     <div class="side-menu">
         <?php if (isset($_SESSION['userID'])): ?>
+            <span class="welcome-message mobile"><?php echo $_SESSION['userName']; ?>님</span>
             <a href="../../logout.php">로그아웃</a>
         <?php else: ?>
             <a href="../../login/php/login.php">로그인</a>

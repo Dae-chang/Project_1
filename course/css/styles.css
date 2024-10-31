@@ -103,7 +103,6 @@ main {
 #course-list,
 #course-detail {
   scrollbar-width: thin;
-  scrollbar-color: #077fff #737373;
 }
 
 #course-list::-webkit-scrollbar,

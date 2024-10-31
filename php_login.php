@@ -111,7 +111,6 @@ class SocialLoginController
             $_SESSION['userID'] = $row['Key'];
 
 
-
             $_SESSION['userName'] = $row['name'];
 
             echo "<script>";
