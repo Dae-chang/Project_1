@@ -286,6 +286,10 @@ Project
 ![image](https://github.com/user-attachments/assets/2eb84e21-a219-4c9a-a131-e7c493b0e64e)
 
 
+#### [시연영상]
+
+https://drive.google.com/file/d/1IRoRE_4x-sIRGmccWpL7VAqZmqnxhi0J/view?usp=drive_link
+
 
 ## 6. 개선 목표
 
