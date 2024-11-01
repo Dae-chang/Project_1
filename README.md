@@ -317,3 +317,5 @@ https://drive.google.com/file/d/1IRoRE_4x-sIRGmccWpL7VAqZmqnxhi0J/view?usp=drive
 #### 이승현
 
 #### 장정규
+
+php를 처음 다뤄봤는데, js와 html을 동시에 다루는 언어라는 점에서 특이했다. 불편한 점도 있었지만 꽤 편리한 부분 또한 있어서, php 프레임워크를 다뤄보고 싶다는 생각도 들었다.
