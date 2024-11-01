@@ -33,6 +33,7 @@
 
 
 ## 2. 프로젝트 구조
+```
 Project
  ┣ 📂.github
  ┃ ┗ 📂workflows
@@ -139,8 +140,18 @@ Project
  ┣ 📜php_login.php
  ┣ 📜README.md
  ┗ 📜user_repository.php
-
+```
 
 ## 3. 역할 분담
 
+#### 손근영 (팀장)
+
+
+
+
+#### 김동규
+
+#### 이승현
+
+#### 장정규
 
